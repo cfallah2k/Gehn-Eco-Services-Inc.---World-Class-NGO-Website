@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 declare global {
   interface Window {
     dataLayer: any[]
+    gtag: (...args: any[]) => void
   }
 }
 
@@ -19,11 +20,11 @@ export function Analytics() {
       document.head.appendChild(script)
 
       window.dataLayer = window.dataLayer || []
-      function gtag(...args: any[]) {
+      window.gtag = (...args: any[]) => {
         window.dataLayer.push(args)
       }
-      gtag('js', new Date())
-      gtag('config', process.env.NEXT_PUBLIC_GA_ID)
+      window.gtag('js', new Date())
+      window.gtag('config', process.env.NEXT_PUBLIC_GA_ID)
     }
   }, [])
 
