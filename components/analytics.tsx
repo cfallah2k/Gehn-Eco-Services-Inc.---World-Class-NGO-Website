@@ -2,6 +2,13 @@
 
 import { useEffect } from 'react'
 
+// Extend Window interface to include dataLayer
+declare global {
+  interface Window {
+    dataLayer: any[]
+  }
+}
+
 export function Analytics() {
   useEffect(() => {
     // Google Analytics 4
