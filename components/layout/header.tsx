@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronDown, Globe, Phone, Mail } from 'lucide-react'
+import { Menu, X, ChevronDown, Globe, Phone, Mail, Shield } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/theme-toggle'
 
@@ -106,6 +106,12 @@ export function Header() {
               <Button variant="ghost" asChild>
                 <Link href="/donate">Donate</Link>
               </Button>
+              <Button variant="outline" asChild>
+                <Link href="/admin/login" className="flex items-center space-x-2">
+                  <Shield className="w-4 h-4" />
+                  <span>Admin Portal</span>
+                </Link>
+              </Button>
               <Button asChild>
                 <Link href="/contact">Get Started</Link>
               </Button>
@@ -156,6 +162,12 @@ export function Header() {
                 <div className="pt-4 border-t border-gray-200">
                   <Button variant="ghost" asChild className="w-full justify-start">
                     <Link href="/donate">Donate</Link>
+                  </Button>
+                  <Button variant="outline" asChild className="w-full mt-2">
+                    <Link href="/admin/login" className="flex items-center justify-start space-x-2">
+                      <Shield className="w-4 h-4" />
+                      <span>Admin Portal</span>
+                    </Link>
                   </Button>
                   <Button asChild className="w-full mt-2">
                     <Link href="/contact">Get Started</Link>
