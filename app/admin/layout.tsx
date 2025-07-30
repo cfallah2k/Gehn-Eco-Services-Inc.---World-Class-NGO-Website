@@ -17,7 +17,8 @@ import {
   GlobeAltIcon,
   HeartIcon,
   CurrencyDollarIcon,
-  ArrowLeftOnRectangleIcon
+  ArrowLeftOnRectangleIcon,
+  ShieldCheckIcon
 } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
@@ -35,6 +36,7 @@ const navigation = [
   { name: 'Analytics', href: '/admin/analytics', icon: ChartBarIcon },
   { name: 'Media Library', href: '/admin/media', icon: PhotoIcon },
   { name: 'Reports', href: '/admin/reports', icon: DocumentTextIcon },
+  { name: 'Policies', href: '/admin/policies', icon: ShieldCheckIcon },
   { name: 'Settings', href: '/admin/settings', icon: CogIcon },
 ]
 
@@ -55,8 +57,8 @@ export default function AdminLayout({
       try {
         // For now, we'll use a simple localStorage check
         // In production, this should be a proper API call
-        const token = localStorage.getItem('admin_token')
-        if (!token) {
+        const isAuthenticated = localStorage.getItem('adminAuthenticated')
+        if (!isAuthenticated) {
           router.push('/admin/login')
           return
         }
@@ -72,7 +74,8 @@ export default function AdminLayout({
   }, [router])
 
   const handleLogout = () => {
-    localStorage.removeItem('admin_token')
+    localStorage.removeItem('adminAuthenticated')
+    localStorage.removeItem('adminUser')
     router.push('/admin/login')
   }
 

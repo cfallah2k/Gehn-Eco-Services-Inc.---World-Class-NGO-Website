@@ -2,7 +2,9 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline'
+import { motion } from 'framer-motion'
+import { Eye, EyeOff, Shield, Lock } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export default function AdminLogin() {
   const [credentials, setCredentials] = useState({
@@ -19,92 +21,112 @@ export default function AdminLogin() {
     setIsLoading(true)
     setError('')
 
-    try {
-      // Simple authentication for demo purposes
-      // In production, this should be a proper API call
-      if (credentials.username === 'admin' && credentials.password === 'ges2024') {
-        localStorage.setItem('admin_token', 'demo_token_123')
-        router.push('/admin')
-      } else {
-        setError('Invalid credentials. Please try again.')
-      }
-    } catch (error) {
-      setError('An error occurred. Please try again.')
-    } finally {
+    // Simple authentication (in production, this would be server-side)
+    if (credentials.username === 'admin' && credentials.password === 'ges2024') {
+      // Set admin session
+      localStorage.setItem('adminAuthenticated', 'true')
+      localStorage.setItem('adminUser', credentials.username)
+      
+      // Redirect to admin dashboard
+      router.push('/admin/dashboard')
+    } else {
+      setError('Invalid username or password')
       setIsLoading(false)
     }
   }
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCredentials({
+      ...credentials,
+      [e.target.name]: e.target.value
+    })
+  }
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-50 to-accent-50">
-      <div className="max-w-md w-full space-y-8">
-        <div className="text-center">
-          <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 bg-primary-600 rounded-xl flex items-center justify-center">
-              <span className="text-white font-bold text-2xl">GES</span>
+    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 flex items-center justify-center px-4">
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="w-full max-w-md"
+      >
+        {/* Header */}
+        <div className="text-center mb-8">
+          <div className="flex items-center justify-center mb-4">
+            <div className="w-16 h-16 bg-primary-600 rounded-xl flex items-center justify-center mr-4">
+              <Shield className="h-8 w-8 text-white" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-bold text-gray-900">Admin Portal</h1>
+              <p className="text-gray-600">Gehn Eco Services Inc.</p>
             </div>
           </div>
-          <h2 className="text-3xl font-bold text-gray-900">Admin Portal</h2>
-          <p className="mt-2 text-gray-600">Sign in to manage your website content</p>
+          <p className="text-gray-600">Sign in to access the admin dashboard</p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-lg p-8">
-          <form className="space-y-6" onSubmit={handleSubmit}>
-            {error && (
-              <div className="bg-red-50 border border-red-200 rounded-md p-4">
-                <p className="text-sm text-red-600">{error}</p>
-              </div>
-            )}
-
+        {/* Login Form */}
+        <div className="bg-white rounded-2xl shadow-xl p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Username Field */}
             <div>
               <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
                 Username
               </label>
-              <input
-                id="username"
-                name="username"
-                type="text"
-                required
-                value={credentials.username}
-                onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                placeholder="Enter your username"
-              />
+              <div className="relative">
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  value={credentials.username}
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
+                  placeholder="Enter your username"
+                  required
+                />
+              </div>
             </div>
 
+            {/* Password Field */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                 Password
               </label>
               <div className="relative">
                 <input
+                  type={showPassword ? 'text' : 'password'}
                   id="password"
                   name="password"
-                  type={showPassword ? 'text' : 'password'}
-                  required
                   value={credentials.password}
-                  onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent pr-12"
+                  onChange={handleInputChange}
+                  className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors"
                   placeholder="Enter your password"
+                  required
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-3 flex items-center"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
                 >
-                  {showPassword ? (
-                    <EyeSlashIcon className="h-5 w-5 text-gray-400" />
-                  ) : (
-                    <EyeIcon className="h-5 w-5 text-gray-400" />
-                  )}
+                  {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
                 </button>
               </div>
             </div>
 
-            <button
+            {/* Error Message */}
+            {error && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-red-50 border border-red-200 rounded-lg p-4"
+              >
+                <p className="text-red-600 text-sm">{error}</p>
+              </motion.div>
+            )}
+
+            {/* Submit Button */}
+            <Button
               type="submit"
               disabled={isLoading}
-              className="w-full bg-primary-600 text-white py-3 px-4 rounded-lg hover:bg-primary-700 focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors disabled:opacity-50"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
@@ -112,18 +134,41 @@ export default function AdminLogin() {
                   Signing in...
                 </div>
               ) : (
-                'Sign In'
+                <div className="flex items-center justify-center">
+                  <Lock className="h-5 w-5 mr-2" />
+                  Sign In
+                </div>
               )}
-            </button>
+            </Button>
           </form>
 
+          {/* Demo Credentials */}
+          <div className="mt-6 p-4 bg-blue-50 rounded-lg">
+            <h3 className="text-sm font-medium text-blue-900 mb-2">Demo Credentials</h3>
+            <div className="text-xs text-blue-700 space-y-1">
+              <p><strong>Username:</strong> admin</p>
+              <p><strong>Password:</strong> ges2024</p>
+            </div>
+          </div>
+
+          {/* Back to Website */}
           <div className="mt-6 text-center">
-            <p className="text-sm text-gray-500">
-              Demo credentials: admin / ges2024
-            </p>
+            <a
+              href="/"
+              className="text-sm text-gray-600 hover:text-primary-600 transition-colors"
+            >
+              ← Back to Website
+            </a>
           </div>
         </div>
-      </div>
+
+        {/* Security Notice */}
+        <div className="mt-6 text-center">
+          <p className="text-xs text-gray-500">
+            This is a secure admin portal. Unauthorized access is prohibited.
+          </p>
+        </div>
+      </motion.div>
     </div>
   )
 } 
