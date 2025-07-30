@@ -2,8 +2,7 @@ import type { Metadata } from 'next'
 import { Inter, Poppins } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
-import { Header } from '@/components/layout/header'
-import { Footer } from '@/components/layout/footer'
+import { LayoutWrapper } from '@/components/layout-wrapper'
 import { Analytics } from '@/components/analytics'
 
 const inter = Inter({ 
@@ -99,13 +98,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <main className="flex-1">
-              {children}
-            </main>
-            <Footer />
-          </div>
+          <LayoutWrapper>
+            {children}
+          </LayoutWrapper>
           <Analytics />
         </ThemeProvider>
       </body>
