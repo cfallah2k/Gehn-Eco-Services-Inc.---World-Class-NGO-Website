@@ -5,11 +5,11 @@ import {
   DocumentTextIcon,
   ChartBarIcon,
   CalendarIcon,
-  DownloadIcon,
+  ArrowDownTrayIcon,
   EyeIcon,
   PrinterIcon,
-  FilterIcon,
-  TrendingUpIcon,
+  FunnelIcon,
+  ArrowTrendingUpIcon,
   UsersIcon,
   CurrencyDollarIcon
 } from '@heroicons/react/24/outline'
@@ -54,7 +54,7 @@ const reportTypes = [
     id: 'impact',
     name: 'Impact Assessment',
     description: 'Program outcomes and success metrics',
-    icon: TrendingUpIcon,
+    icon: ArrowTrendingUpIcon,
     color: 'bg-indigo-500'
   }
 ]
@@ -384,7 +384,7 @@ export default function Reports() {
         <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Actions</h3>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <button className="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-            <DownloadIcon className="h-5 w-5 text-gray-400 mr-3" />
+            <ArrowDownTrayIcon className="h-5 w-5 text-gray-400 mr-3" />
             <div className="text-left">
               <div className="font-medium text-gray-900">Export All Reports</div>
               <div className="text-sm text-gray-500">Download all reports as ZIP</div>
@@ -398,7 +398,7 @@ export default function Reports() {
             </div>
           </button>
           <button className="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors">
-            <FilterIcon className="h-5 w-5 text-gray-400 mr-3" />
+            <FunnelIcon className="h-5 w-5 text-gray-400 mr-3" />
             <div className="text-left">
               <div className="font-medium text-gray-900">Custom Reports</div>
               <div className="text-sm text-gray-500">Create custom analytics</div>

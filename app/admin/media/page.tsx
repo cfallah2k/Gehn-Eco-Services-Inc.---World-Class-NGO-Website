@@ -6,7 +6,7 @@ import {
   PencilIcon, 
   TrashIcon, 
   EyeIcon,
-  DownloadIcon,
+  ArrowDownTrayIcon,
   FolderIcon,
   PhotoIcon,
   DocumentIcon,
@@ -144,7 +144,7 @@ export default function MediaLibrary() {
         </div>
         <div className="flex items-center space-x-4">
           <button className="bg-gray-100 text-gray-700 px-3 py-2 rounded-lg hover:bg-gray-200 transition-colors">
-            <DownloadIcon className="h-5 w-5" />
+            <ArrowDownTrayIcon className="h-5 w-5" />
           </button>
           <button className="bg-primary-600 text-white px-4 py-2 rounded-lg hover:bg-primary-700 transition-colors flex items-center">
             <PlusIcon className="h-5 w-5 mr-2" />
@@ -253,7 +253,7 @@ export default function MediaLibrary() {
                             <EyeIcon className="h-4 w-4 text-gray-600" />
                           </button>
                           <button className="p-2 bg-white rounded-full shadow-lg hover:bg-gray-50">
-                            <DownloadIcon className="h-4 w-4 text-gray-600" />
+                            <ArrowDownTrayIcon className="h-4 w-4 text-gray-600" />
                           </button>
                           <button className="p-2 bg-white rounded-full shadow-lg hover:bg-gray-50">
                             <PencilIcon className="h-4 w-4 text-gray-600" />
@@ -309,7 +309,7 @@ export default function MediaLibrary() {
                         <EyeIcon className="h-4 w-4" />
                       </button>
                       <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors">
-                        <DownloadIcon className="h-4 w-4" />
+                        <ArrowDownTrayIcon className="h-4 w-4" />
                       </button>
                       <button className="p-2 text-gray-400 hover:text-gray-600 transition-colors">
                         <PencilIcon className="h-4 w-4" />

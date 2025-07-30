@@ -8,8 +8,8 @@ import {
   GlobeAltIcon,
   CalendarIcon,
   CurrencyDollarIcon,
-  TrendingUpIcon,
-  TrendingDownIcon
+  ArrowTrendingUpIcon,
+  ArrowTrendingDownIcon
 } from '@heroicons/react/24/outline'
 
 const analyticsData = {
@@ -92,7 +92,7 @@ export default function Analytics() {
               <p className="text-2xl font-semibold text-gray-900">{analyticsData.overview.totalVisitors.toLocaleString()}</p>
             </div>
             <div className="flex items-center text-green-600">
-              <TrendingUpIcon className="h-4 w-4 mr-1" />
+              <ArrowTrendingUpIcon className="h-4 w-4 mr-1" />
               <span className="text-sm">+12.5%</span>
             </div>
           </div>
@@ -110,7 +110,7 @@ export default function Analytics() {
               <p className="text-2xl font-semibold text-gray-900">{analyticsData.overview.pageViews.toLocaleString()}</p>
             </div>
             <div className="flex items-center text-green-600">
-              <TrendingUpIcon className="h-4 w-4 mr-1" />
+              <ArrowTrendingUpIcon className="h-4 w-4 mr-1" />
               <span className="text-sm">+8.3%</span>
             </div>
           </div>
@@ -128,7 +128,7 @@ export default function Analytics() {
               <p className="text-2xl font-semibold text-gray-900">{analyticsData.overview.bounceRate}%</p>
             </div>
             <div className="flex items-center text-red-600">
-              <TrendingDownIcon className="h-4 w-4 mr-1" />
+              <ArrowTrendingDownIcon className="h-4 w-4 mr-1" />
               <span className="text-sm">-2.1%</span>
             </div>
           </div>
@@ -146,7 +146,7 @@ export default function Analytics() {
               <p className="text-2xl font-semibold text-gray-900">{analyticsData.overview.conversionRate}%</p>
             </div>
             <div className="flex items-center text-green-600">
-              <TrendingUpIcon className="h-4 w-4 mr-1" />
+              <ArrowTrendingUpIcon className="h-4 w-4 mr-1" />
               <span className="text-sm">+1.2%</span>
             </div>
           </div>
@@ -173,9 +173,9 @@ export default function Analytics() {
                     page.change > 0 ? 'text-green-600' : 'text-red-600'
                   }`}>
                     {page.change > 0 ? (
-                      <TrendingUpIcon className="h-4 w-4 mr-1" />
+                      <ArrowTrendingUpIcon className="h-4 w-4 mr-1" />
                     ) : (
-                      <TrendingDownIcon className="h-4 w-4 mr-1" />
+                      <ArrowTrendingDownIcon className="h-4 w-4 mr-1" />
                     )}
                     {Math.abs(page.change)}%
                   </div>

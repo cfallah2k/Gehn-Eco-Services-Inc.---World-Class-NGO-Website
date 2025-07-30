@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { TargetIcon, EyeIcon } from '@heroicons/react/24/outline'
+import { BullseyeIcon, EyeIcon } from '@heroicons/react/24/outline'
 
 export function MissionVision() {
   return (
@@ -17,7 +17,7 @@ export function MissionVision() {
           >
             <div className="flex items-center space-x-3">
               <div className="w-12 h-12 bg-primary-600 rounded-lg flex items-center justify-center">
-                <TargetIcon className="h-6 w-6 text-white" />
+                <BullseyeIcon className="h-6 w-6 text-white" />
               </div>
               <h2 className="text-3xl font-bold text-gray-900">Our Mission</h2>
             </div>
