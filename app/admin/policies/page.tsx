@@ -5,12 +5,12 @@ import { motion } from 'framer-motion'
 import { 
   DocumentTextIcon, 
   ShieldCheckIcon, 
-  CookieIcon,
+  CakeIcon,
   PencilIcon,
   EyeIcon,
   TrashIcon,
   PlusIcon,
-  SaveIcon,
+  CheckIcon,
   XMarkIcon
 } from '@heroicons/react/24/outline'
 import { Button } from '@/components/ui/button'
@@ -165,7 +165,7 @@ export default function PoliciesPage() {
       case 'terms':
         return <DocumentTextIcon className="h-6 w-6" />
       case 'cookies':
-        return <CookieIcon className="h-6 w-6" />
+        return <CakeIcon className="h-6 w-6" />
       default:
         return <DocumentTextIcon className="h-6 w-6" />
     }
@@ -307,7 +307,7 @@ export default function PoliciesPage() {
                       </div>
                       <div className="flex items-center space-x-3">
                         <Button onClick={handleSave}>
-                          <SaveIcon className="h-4 w-4 mr-2" />
+                          <CheckIcon className="h-4 w-4 mr-2" />
                           Save Changes
                         </Button>
                         <Button variant="outline" onClick={handleCancel}>
@@ -351,7 +351,7 @@ export default function PoliciesPage() {
             Update Privacy Policy
           </Button>
           <Button variant="outline" className="justify-start">
-            <CookieIcon className="h-4 w-4 mr-2" />
+            <CakeIcon className="h-4 w-4 mr-2" />
             Review Cookie Settings
           </Button>
         </div>

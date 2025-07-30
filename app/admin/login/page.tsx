@@ -43,7 +43,7 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 to-secondary-50 flex items-center justify-center p-4 sm:p-6">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center p-4 sm:p-6">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -52,7 +52,7 @@ export default function AdminLogin() {
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
           <div className="flex items-center justify-center mb-4">
-            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary-600 rounded-xl flex items-center justify-center mr-3 sm:mr-4">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-600 rounded-xl flex items-center justify-center mr-3 sm:mr-4">
               <Shield className="h-6 w-6 sm:h-8 sm:w-8 text-white" />
             </div>
             <div>
@@ -64,7 +64,7 @@ export default function AdminLogin() {
         </div>
 
         {/* Login Form */}
-        <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8">
+        <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-200">
           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
             {/* Username Field */}
             <div>
@@ -78,7 +78,7 @@ export default function AdminLogin() {
                   name="username"
                   value={credentials.username}
                   onChange={handleInputChange}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors text-sm sm:text-base"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors text-sm sm:text-base"
                   placeholder="Enter your username"
                   required
                 />
@@ -97,7 +97,7 @@ export default function AdminLogin() {
                   name="password"
                   value={credentials.password}
                   onChange={handleInputChange}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 pr-10 sm:pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-colors text-sm sm:text-base"
+                  className="w-full px-3 sm:px-4 py-2 sm:py-3 pr-10 sm:pr-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors text-sm sm:text-base"
                   placeholder="Enter your password"
                   required
                 />
@@ -126,7 +126,7 @@ export default function AdminLogin() {
             <Button
               type="submit"
               disabled={isLoading}
-              className="w-full py-2 sm:py-3 bg-primary-600 hover:bg-primary-700 text-white font-medium rounded-lg transition-colors disabled:opacity-50 text-sm sm:text-base"
+              className="w-full py-2 sm:py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors disabled:opacity-50 text-sm sm:text-base"
             >
               {isLoading ? (
                 <div className="flex items-center justify-center">
@@ -155,7 +155,7 @@ export default function AdminLogin() {
           <div className="mt-4 sm:mt-6 text-center">
             <a
               href="/"
-              className="text-xs sm:text-sm text-gray-600 hover:text-primary-600 transition-colors"
+              className="text-xs sm:text-sm text-gray-600 hover:text-green-600 transition-colors"
             >
               ← Back to Website
             </a>
