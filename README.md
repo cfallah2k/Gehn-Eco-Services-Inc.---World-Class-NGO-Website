@@ -1,249 +1,242 @@
-# Gehn Eco Services Inc. - World-Class NGO Website
+# Gehn Eco Services Inc. - Website
 
-A comprehensive, world-class website for Gehn Eco Services Inc., a women-led social enterprise specializing in waste value chain management, environmental consultancy, and innovative livelihood opportunities.
+A modern, responsive website for Gehn Eco Services Inc., a women-led social enterprise specializing in environmental consultancy, waste management, and livelihood programs.
 
-## 🌟 Features
+## 🚀 Features
 
-### 🏠 Public Website
-- **Modern Design**: Beautiful, responsive design with smooth animations
-- **Multi-page Structure**: Home, About, Services, Impact, Team, News, Contact
-- **SEO Optimized**: Meta tags, Open Graph, structured data
-- **Performance**: Fast loading with Next.js 14 and optimized images
-- **Accessibility**: WCAG compliant with proper ARIA labels
-- **Mobile First**: Responsive design for all devices
+### Core Features
+- **Modern Loading Screen**: Advanced 10-second loading animation with informative content
+- **Responsive Design**: Fully responsive across all devices (mobile, tablet, desktop)
+- **Professional Layout**: Clean, organized content structure with proper spacing
+- **Admin Portal**: Secure Supabase-powered authentication system
+- **Multi-page Structure**: Organized content across dedicated pages
 
-### 🔐 Admin Portal
-A comprehensive admin portal that allows non-technical users to manage all website content without coding:
+### Pages & Sections
+- **Home**: Hero section, about, services, impact, CTA
+- **About**: Mission, vision, values, history, awards
+- **Services**: Comprehensive service offerings with case studies
+- **Impact**: Success stories, statistics, achievements
+- **Team**: Leadership profiles and organizational values
+- **News**: Latest updates and featured articles
+- **Contact**: Contact form, office locations, FAQ
 
-#### 📊 Dashboard
-- Real-time statistics and overview
-- Quick actions for common tasks
-- Recent activity feed
-- System status monitoring
-
-#### 📰 News & Updates Management
-- Create, edit, and publish news articles
-- Rich text editor with formatting options
-- Category management
-- Featured articles
-- Draft and scheduling system
-- SEO optimization for each article
-
-#### 💼 Job Listings Management
-- Post and manage job opportunities
-- Application tracking
-- Department categorization
-- Status management (Active, Closed, Draft)
-- Detailed job descriptions and requirements
-
-#### 📅 Events Management
-- Create and manage events
-- Registration tracking
-- Event categories and types
-- Capacity management
-- Featured events system
-
-#### 👥 Team Management
-- Add and manage team members
-- Profile management with photos
-- Department organization
-- Contact information management
-- Social media links
-
-#### 💰 Donations Management
-- Track all donations and contributions
-- Payment status monitoring
-- Donor information management
-- Purpose categorization
-- Anonymous donation support
-- Financial reporting
-
-#### 📈 Analytics Dashboard
-- Website traffic analysis
-- User engagement metrics
-- Page performance tracking
-- Traffic source analysis
-- Conversion rate monitoring
-- Export capabilities
-
-#### 🖼️ Media Library
-- Upload and manage images, documents, videos
-- Folder organization
-- File categorization
-- Search and filter functionality
-- Grid and list view modes
-- Bulk operations
-
-#### ⚙️ Settings & Configuration
-- **General Settings**: Website information, contact details
-- **User Management**: Admin users and permissions
-- **Security Settings**: Authentication, password policies
-- **Notification Settings**: Email preferences
-- **SEO & Analytics**: Google Analytics, meta descriptions
-- **Content Settings**: Language, auto-save, optimization
-
-#### 📋 Additional Admin Features
-- **Impact Stories Management**: Success stories and case studies
-- **Services Management**: Service offerings and descriptions
-- **Training Programs**: Educational content and courses
-- **Reports Generation**: Custom reports and analytics
-- **Backup & Restore**: Data protection and recovery
-
-## 🚀 Technology Stack
-
-### Frontend
-- **Next.js 14**: React framework with App Router
-- **TypeScript**: Type-safe development
-- **Tailwind CSS**: Utility-first CSS framework
+### Technical Features
+- **Next.js 14**: Latest React framework with App Router
+- **TypeScript**: Full type safety
+- **Tailwind CSS**: Utility-first styling
 - **Framer Motion**: Smooth animations and transitions
-- **Lucide React**: Beautiful icons
-- **React Hook Form**: Form handling and validation
+- **Supabase**: Backend database and authentication
+- **Responsive Images**: Optimized for all screen sizes
 
-### Admin Portal
-- **Authentication**: Secure login system
-- **Role-based Access**: User permissions and roles
-- **Real-time Updates**: Live data synchronization
-- **File Upload**: Secure media management
-- **Rich Text Editor**: Content creation tools
-- **Analytics Integration**: Google Analytics 4
-
-### Performance & SEO
-- **Image Optimization**: Next.js Image component
-- **Code Splitting**: Automatic bundle optimization
-- **SEO Meta Tags**: Dynamic meta information
-- **Structured Data**: Schema.org markup
-- **Performance Monitoring**: Core Web Vitals tracking
-
-## 📁 Project Structure
-
-```
-gehn-eco-services-website/
-├── app/                          # Next.js 14 App Router
-│   ├── admin/                    # Admin portal pages
-│   │   ├── login/               # Admin authentication
-│   │   ├── news/                # News management
-│   │   ├── jobs/                # Job listings
-│   │   ├── events/              # Events management
-│   │   ├── team/                # Team management
-│   │   ├── donations/           # Donations tracking
-│   │   ├── analytics/           # Analytics dashboard
-│   │   ├── media/               # Media library
-│   │   └── settings/            # Configuration
-│   ├── about/                   # About page
-│   ├── services/                # Services page
-│   ├── contact/                 # Contact page
-│   └── globals.css              # Global styles
-├── components/                   # Reusable components
-│   ├── layout/                  # Layout components
-│   ├── sections/                # Page sections
-│   ├── ui/                      # UI components
-│   └── admin/                   # Admin components
-├── lib/                         # Utility functions
-├── public/                      # Static assets
-└── types/                       # TypeScript types
-```
-
-## 🛠️ Installation & Setup
+## 🛠️ Setup Instructions
 
 ### Prerequisites
 - Node.js 18+ 
 - npm or yarn
+- Supabase account
 
-### Installation
+### 1. Clone the Repository
 ```bash
-# Clone the repository
-git clone [repository-url]
-
-# Navigate to project directory
+git clone <repository-url>
 cd gehn-eco-services-website
+```
 
-# Install dependencies
+### 2. Install Dependencies
+```bash
 npm install
+```
 
-# Start development server
+### 3. Environment Configuration
+Create a `.env.local` file in the root directory:
+
+```env
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+
+# Admin Portal Configuration
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=ges2024
+
+# Contact Form Configuration
+CONTACT_EMAIL=info@gehnecservices.com
+```
+
+### 4. Supabase Setup
+
+#### Create Supabase Project
+1. Go to [supabase.com](https://supabase.com)
+2. Create a new project
+3. Get your project URL and anon key from Settings > API
+
+#### Database Schema
+Run the following SQL in your Supabase SQL editor:
+
+```sql
+-- Create users table
+CREATE TABLE users (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  email TEXT UNIQUE NOT NULL,
+  name TEXT NOT NULL,
+  role TEXT DEFAULT 'user' CHECK (role IN ('admin', 'user')),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Create donations table
+CREATE TABLE donations (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  donor_name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  amount DECIMAL(10,2) NOT NULL,
+  message TEXT,
+  status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'completed', 'failed')),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Create contact_messages table
+CREATE TABLE contact_messages (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name TEXT NOT NULL,
+  email TEXT NOT NULL,
+  subject TEXT NOT NULL,
+  message TEXT NOT NULL,
+  status TEXT DEFAULT 'unread' CHECK (status IN ('unread', 'read', 'replied')),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Create newsletter_subscribers table
+CREATE TABLE newsletter_subscribers (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  email TEXT UNIQUE NOT NULL,
+  status TEXT DEFAULT 'active' CHECK (status IN ('active', 'unsubscribed')),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);
+
+-- Insert default admin user
+INSERT INTO users (email, name, role) VALUES ('admin@gehnecservices.com', 'Admin User', 'admin');
+```
+
+#### Authentication Setup
+1. Go to Authentication > Settings in Supabase
+2. Enable Email auth provider
+3. Set up email templates (optional)
+
+### 5. Run Development Server
+```bash
 npm run dev
 ```
 
-### Environment Variables
-Create a `.env.local` file:
-```env
-NEXT_PUBLIC_GA_ID=your-google-analytics-id
-NEXT_PUBLIC_SITE_URL=https://gehnecservices.com
+Open [http://localhost:3000](http://localhost:3000) to view the website.
+
+## 📁 Project Structure
+
+```
+├── app/                    # Next.js App Router pages
+│   ├── about/             # About page
+│   ├── admin/             # Admin portal
+│   ├── contact/           # Contact page
+│   ├── impact/            # Impact page
+│   ├── news/              # News page
+│   ├── services/          # Services page
+│   └── team/              # Team page
+├── components/            # React components
+│   ├── layout/           # Header, footer, layout wrapper
+│   ├── pages/            # Page-specific components
+│   ├── sections/         # Reusable section components
+│   └── ui/               # UI components (buttons, etc.)
+├── lib/                  # Utility functions and configurations
+│   ├── supabase.ts       # Supabase client configuration
+│   └── utils.ts          # Utility functions
+└── public/               # Static assets
 ```
 
-## 🔐 Admin Portal Access
+## 🎨 Customization
 
-### Demo Credentials
-- **URL**: `http://localhost:3000/admin/login`
-- **Username**: `admin`
-- **Password**: `ges2024`
+### Colors & Branding
+Update the color scheme in `tailwind.config.js`:
 
-### Admin Features
-1. **Dashboard**: Overview of all website activities
-2. **Content Management**: Easy-to-use interfaces for all content
-3. **User Management**: Add and manage admin users
-4. **Analytics**: Track website performance and user engagement
-5. **Settings**: Configure website preferences and SEO
+```javascript
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        primary: {
+          50: '#f0fdf4',
+          600: '#16a34a',
+          // ... other shades
+        },
+        secondary: {
+          900: '#111827',
+          // ... other shades
+        }
+      }
+    }
+  }
+}
+```
 
-## 📊 Key Features
+### Content Updates
+- **Hero Section**: Update in `components/sections/hero-section.tsx`
+- **About Content**: Modify `components/pages/about/` components
+- **Services**: Update `components/pages/services/` components
+- **Team Members**: Edit `app/team/page.tsx`
+- **News Articles**: Update `app/news/page.tsx`
 
-### For Non-Technical Users
-- **No Coding Required**: All content management through user-friendly interfaces
-- **Rich Text Editor**: Create beautiful content with formatting tools
-- **Media Management**: Upload and organize images, documents, videos
-- **Bulk Operations**: Manage multiple items efficiently
-- **Search & Filter**: Find content quickly with advanced search
+## 🚀 Deployment
 
-### For Organizations
-- **Multi-User Support**: Multiple admin users with different permissions
-- **Activity Logging**: Track all changes and updates
-- **Backup System**: Automatic data protection
-- **Performance Monitoring**: Real-time website analytics
-- **SEO Tools**: Built-in search engine optimization
+### Vercel (Recommended)
+1. Connect your GitHub repository to Vercel
+2. Add environment variables in Vercel dashboard
+3. Deploy automatically on push
 
-### For Visitors
-- **Fast Loading**: Optimized for speed and performance
-- **Mobile Friendly**: Perfect experience on all devices
-- **Accessible**: WCAG compliant for all users
-- **Search Engine Optimized**: Better visibility in search results
+### Other Platforms
+- **Netlify**: Build command: `npm run build`, Publish directory: `out`
+- **Railway**: Connect repository and add environment variables
+- **DigitalOcean App Platform**: Deploy with Node.js preset
 
-## 🎯 Business Value
+## 🔧 Admin Portal
 
-This website provides **$100,000+ value** through:
+### Access
+- URL: `/admin/login`
+- Default credentials: `admin@gehnecservices.com` / `ges2024`
 
-1. **Professional Branding**: World-class design that builds trust
-2. **Content Management**: Easy updates without technical knowledge
-3. **SEO Optimization**: Better search engine rankings
-4. **Analytics**: Data-driven decision making
-5. **Donation Management**: Streamlined fundraising
-6. **Event Management**: Professional event coordination
-7. **Team Showcase**: Highlighting organizational expertise
-8. **Impact Tracking**: Demonstrating social value
+### Features
+- Secure Supabase authentication
+- Dashboard for managing content
+- Analytics and reporting
+- User management
 
-## 🌍 Environmental Focus
+## 📱 Responsive Design
 
-Built with sustainability in mind:
-- **Green Hosting**: Optimized for energy efficiency
-- **Performance**: Fast loading reduces server load
-- **Accessibility**: Inclusive design for all users
-- **Mobile First**: Reduces device energy consumption
+The website is fully responsive with breakpoints:
+- **Mobile**: < 640px
+- **Tablet**: 640px - 1024px  
+- **Desktop**: > 1024px
 
-## 📈 Future Enhancements
+## 🎯 Performance
 
-- **Multi-language Support**: International expansion
-- **E-commerce Integration**: Product and service sales
-- **Volunteer Management**: Volunteer coordination system
-- **Grant Management**: Funding application tracking
-- **API Integration**: Third-party service connections
-- **Advanced Analytics**: Machine learning insights
+- **Loading Screen**: 10-second modern animation
+- **Image Optimization**: Next.js Image component
+- **Code Splitting**: Automatic with Next.js
+- **SEO Optimized**: Meta tags and structured data
 
 ## 🤝 Contributing
 
-This project is designed for Gehn Eco Services Inc. For support or customization, please contact the development team.
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Submit a pull request
 
 ## 📄 License
 
-This project is proprietary software developed for Gehn Eco Services Inc.
+This project is licensed under the MIT License.
+
+## 📞 Support
+
+For support or questions:
+- Email: info@gehnecservices.com
+- Website: https://gehnecservices.com
 
 ---
 

@@ -1,186 +1,208 @@
-import type { Metadata } from 'next'
+import { motion } from 'framer-motion'
+import { FileText, Shield, Users, Globe, AlertTriangle } from 'lucide-react'
 
-export const metadata: Metadata = {
-  title: 'Terms of Service - Gehn Eco Services Inc.',
-  description: 'Read the terms and conditions governing the use of Gehn Eco Services Inc. website and services.',
-  keywords: ['terms of service', 'terms and conditions', 'legal', 'environmental services', 'user agreement'],
-}
-
-export default function TermsOfService() {
+export default function TermsPage() {
   return (
-    <div className="pt-32 pb-20">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <div className="prose prose-lg max-w-none">
-          <h1 className="text-4xl font-bold text-gray-900 mb-8">Terms of Service</h1>
-          
-          <div className="bg-blue-50 border-l-4 border-blue-400 p-4 mb-8">
-            <p className="text-blue-800">
-              <strong>Last updated:</strong> January 2024
-            </p>
+    <div className="space-y-0">
+      {/* Hero Section */}
+      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="inline-flex items-center px-4 py-2 rounded-full bg-primary-100 text-primary-700 text-sm font-medium mb-6"
+            >
+              <FileText className="w-4 h-4 mr-2" />
+              Terms & Conditions
+            </motion.div>
+            
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.6 }}
+              className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-secondary-900 mb-6"
+            >
+              Terms of{' '}
+              <span className="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
+                Service
+              </span>
+            </motion.h1>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="text-xl text-secondary-600 max-w-3xl mx-auto"
+            >
+              Please read these terms carefully before using our website and services. 
+              By accessing our site, you agree to be bound by these terms and conditions.
+            </motion.p>
           </div>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Acceptance of Terms</h2>
-            <p className="text-gray-600 mb-4">
-              By accessing and using the website and services of Gehn Eco Services Inc. ("we," "our," or "us"), 
-              you accept and agree to be bound by the terms and provision of this agreement. If you do not 
-              agree to abide by the above, please do not use this service.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Description of Service</h2>
-            <p className="text-gray-600 mb-4">
-              Gehn Eco Services Inc. provides environmental services including but not limited to:
-            </p>
-            <ul className="list-disc pl-6 text-gray-600 mb-4">
-              <li>Waste management and recycling solutions</li>
-              <li>Environmental consultancy and assessment</li>
-              <li>Sanitation and hygiene programs</li>
-              <li>Livelihood and capacity building programs</li>
-              <li>Training and educational services</li>
-              <li>Impact assessment and reporting</li>
-            </ul>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">3. User Responsibilities</h2>
-            <p className="text-gray-600 mb-4">
-              As a user of our services, you agree to:
-            </p>
-            <ul className="list-disc pl-6 text-gray-600 mb-4">
-              <li>Provide accurate and complete information</li>
-              <li>Maintain the security of your account credentials</li>
-              <li>Use our services for lawful purposes only</li>
-              <li>Respect intellectual property rights</li>
-              <li>Not interfere with the proper functioning of our services</li>
-              <li>Comply with all applicable laws and regulations</li>
-            </ul>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">4. Intellectual Property</h2>
-            <p className="text-gray-600 mb-4">
-              The content on this website, including but not limited to text, graphics, images, logos, 
-              and software, is the property of Gehn Eco Services Inc. and is protected by copyright laws. 
-              You may not reproduce, distribute, or create derivative works without our express written consent.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">5. Privacy Policy</h2>
-            <p className="text-gray-600 mb-4">
-              Your privacy is important to us. Please review our Privacy Policy, which also governs your 
-              use of our services, to understand our practices regarding the collection and use of your 
-              personal information.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">6. Service Availability</h2>
-            <p className="text-gray-600 mb-4">
-              We strive to provide reliable and uninterrupted services. However, we do not guarantee that 
-              our services will be available at all times. We may temporarily suspend or discontinue 
-              services for maintenance, updates, or other reasons.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">7. Limitation of Liability</h2>
-            <p className="text-gray-600 mb-4">
-              To the maximum extent permitted by law, Gehn Eco Services Inc. shall not be liable for any 
-              indirect, incidental, special, consequential, or punitive damages, including but not limited 
-              to loss of profits, data, or use, arising out of or relating to your use of our services.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">8. Indemnification</h2>
-            <p className="text-gray-600 mb-4">
-              You agree to indemnify and hold harmless Gehn Eco Services Inc. and its officers, directors, 
-              employees, and agents from any claims, damages, losses, or expenses arising out of your 
-              use of our services or violation of these terms.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">9. Donations and Payments</h2>
-            <p className="text-gray-600 mb-4">
-              When making donations or payments through our website:
-            </p>
-            <ul className="list-disc pl-6 text-gray-600 mb-4">
-              <li>All donations are voluntary and non-refundable</li>
-              <li>We use secure payment processors to handle transactions</li>
-              <li>You agree to provide accurate payment information</li>
-              <li>We reserve the right to refuse or cancel donations</li>
-              <li>Tax receipts will be provided as required by law</li>
-            </ul>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">10. Environmental Services</h2>
-            <p className="text-gray-600 mb-4">
-              Our environmental services are provided "as is" and "as available." We make reasonable 
-              efforts to ensure the quality and effectiveness of our services, but we do not guarantee 
-              specific outcomes or results.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">11. Third-Party Links</h2>
-            <p className="text-gray-600 mb-4">
-              Our website may contain links to third-party websites. We are not responsible for the 
-              content, privacy policies, or practices of these external sites. Your use of third-party 
-              sites is at your own risk.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">12. Termination</h2>
-            <p className="text-gray-600 mb-4">
-              We may terminate or suspend your access to our services at any time, with or without 
-              cause, with or without notice. Upon termination, your right to use our services will 
-              cease immediately.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">13. Governing Law</h2>
-            <p className="text-gray-600 mb-4">
-              These terms shall be governed by and construed in accordance with the laws of Nigeria. 
-              Any disputes arising from these terms shall be subject to the exclusive jurisdiction 
-              of the courts in Lagos, Nigeria.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">14. Changes to Terms</h2>
-            <p className="text-gray-600 mb-4">
-              We reserve the right to modify these terms at any time. We will notify users of any 
-              material changes by posting the updated terms on our website. Your continued use of 
-              our services after such changes constitutes acceptance of the new terms.
-            </p>
-          </section>
-
-          <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">15. Contact Information</h2>
-            <p className="text-gray-600 mb-4">
-              If you have any questions about these Terms of Service, please contact us:
-            </p>
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-gray-700 mb-2">
-                <strong>Email:</strong> legal@gehnecservices.com
-              </p>
-              <p className="text-gray-700 mb-2">
-                <strong>Phone:</strong> +234 803 123 4567
-              </p>
-              <p className="text-gray-700">
-                <strong>Address:</strong> 123 Environmental Street, Victoria Island, Lagos, Nigeria
-              </p>
-            </div>
-          </section>
         </div>
-      </div>
+      </section>
+
+      {/* Content */}
+      <section className="py-16 lg:py-24 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-4xl mx-auto">
+            <div className="prose prose-lg max-w-none">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">1. Acceptance of Terms</h2>
+                <p className="text-secondary-600 mb-8">
+                  By accessing and using the Gehn Eco Services Inc. website and services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+                </p>
+
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">2. Description of Service</h2>
+                <p className="text-secondary-600 mb-4">
+                  Gehn Eco Services Inc. provides environmental consultancy, waste management services, and community development programs. Our services include:
+                </p>
+                <ul className="list-disc list-inside text-secondary-600 mb-8 space-y-2">
+                  <li>Environmental consultancy and assessment</li>
+                  <li>Waste management and recycling programs</li>
+                  <li>Community health and sanitation initiatives</li>
+                  <li>Livelihood and skill development programs</li>
+                  <li>Environmental education and awareness</li>
+                  <li>Donation and fundraising services</li>
+                </ul>
+
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">3. User Responsibilities</h2>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-6 mb-8">
+                  <div className="flex items-center mb-3">
+                    <Users className="h-5 w-5 text-blue-600 mr-2" />
+                    <h3 className="font-semibold text-blue-800">Your Obligations</h3>
+                  </div>
+                  <ul className="text-blue-700 space-y-2">
+                    <li>• Provide accurate and truthful information</li>
+                    <li>• Respect intellectual property rights</li>
+                    <li>• Use services for lawful purposes only</li>
+                    <li>• Maintain confidentiality of account information</li>
+                    <li>• Report any security concerns immediately</li>
+                  </ul>
+                </div>
+
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">4. Prohibited Activities</h2>
+                <p className="text-secondary-600 mb-4">
+                  You agree not to engage in any of the following activities:
+                </p>
+                <ul className="list-disc list-inside text-secondary-600 mb-8 space-y-2">
+                  <li>Using our services for any illegal or unauthorized purpose</li>
+                  <li>Attempting to gain unauthorized access to our systems</li>
+                  <li>Interfering with or disrupting our services</li>
+                  <li>Transmitting viruses, malware, or harmful code</li>
+                  <li>Harassing, abusing, or harming others</li>
+                  <li>Violating any applicable laws or regulations</li>
+                </ul>
+
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">5. Intellectual Property Rights</h2>
+                <p className="text-secondary-600 mb-4">
+                  All content on this website, including but not limited to text, graphics, logos, images, and software, is the property of Gehn Eco Services Inc. and is protected by copyright and other intellectual property laws.
+                </p>
+                <p className="text-secondary-600 mb-8">
+                  You may not reproduce, distribute, modify, or create derivative works without our express written consent.
+                </p>
+
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">6. Privacy and Data Protection</h2>
+                <div className="bg-green-50 border border-green-200 rounded-lg p-6 mb-8">
+                  <div className="flex items-center mb-3">
+                    <Shield className="h-5 w-5 text-green-600 mr-2" />
+                    <h3 className="font-semibold text-green-800">Data Protection</h3>
+                  </div>
+                  <p className="text-green-700 mb-3">
+                    We are committed to protecting your privacy. Our collection and use of personal information is governed by our Privacy Policy, which is incorporated into these terms by reference.
+                  </p>
+                  <p className="text-green-700">
+                    By using our services, you consent to the collection and use of your information as described in our Privacy Policy.
+                  </p>
+                </div>
+
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">7. Donations and Payments</h2>
+                <p className="text-secondary-600 mb-4">
+                  When making donations through our website:
+                </p>
+                <ul className="list-disc list-inside text-secondary-600 mb-8 space-y-2">
+                  <li>All donations are voluntary and non-refundable</li>
+                  <li>We use secure payment processors to handle transactions</li>
+                  <li>Donation receipts will be provided for tax purposes</li>
+                  <li>We reserve the right to refuse or return donations</li>
+                  <li>Donations are used for environmental and community programs</li>
+                </ul>
+
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">8. Limitation of Liability</h2>
+                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6 mb-8">
+                  <div className="flex items-center mb-3">
+                    <AlertTriangle className="h-5 w-5 text-yellow-600 mr-2" />
+                    <h3 className="font-semibold text-yellow-800">Important Notice</h3>
+                  </div>
+                  <p className="text-yellow-700">
+                    Gehn Eco Services Inc. shall not be liable for any indirect, incidental, special, consequential, or punitive damages, including but not limited to loss of profits, data, or use, arising out of or relating to your use of our services.
+                  </p>
+                </div>
+
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">9. Disclaimers</h2>
+                <p className="text-secondary-600 mb-4">
+                  Our services are provided "as is" and "as available" without warranties of any kind. We do not guarantee:
+                </p>
+                <ul className="list-disc list-inside text-secondary-600 mb-8 space-y-2">
+                  <li>Uninterrupted or error-free service</li>
+                  <li>Immediate response to all inquiries</li>
+                  <li>Availability of all features at all times</li>
+                  <li>Compatibility with all devices or browsers</li>
+                  <li>Accuracy of all information provided</li>
+                </ul>
+
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">10. Indemnification</h2>
+                <p className="text-secondary-600 mb-8">
+                  You agree to indemnify and hold harmless Gehn Eco Services Inc., its officers, directors, employees, and agents from any claims, damages, losses, or expenses arising from your use of our services or violation of these terms.
+                </p>
+
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">11. Termination</h2>
+                <p className="text-secondary-600 mb-8">
+                  We may terminate or suspend your access to our services at any time, with or without cause, with or without notice. Upon termination, your right to use our services will cease immediately.
+                </p>
+
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">12. Governing Law</h2>
+                <p className="text-secondary-600 mb-8">
+                  These terms shall be governed by and construed in accordance with the laws of Nigeria. Any disputes arising from these terms shall be resolved in the courts of Lagos, Nigeria.
+                </p>
+
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">13. Changes to Terms</h2>
+                <p className="text-secondary-600 mb-8">
+                  We reserve the right to modify these terms at any time. We will notify users of any material changes by posting the new terms on our website. Your continued use of our services after such changes constitutes acceptance of the new terms.
+                </p>
+
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">14. Severability</h2>
+                <p className="text-secondary-600 mb-8">
+                  If any provision of these terms is found to be unenforceable or invalid, that provision will be limited or eliminated to the minimum extent necessary so that these terms will otherwise remain in full force and effect.
+                </p>
+
+                <h2 className="text-2xl font-bold text-secondary-900 mb-6">15. Contact Information</h2>
+                <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                  <p className="text-blue-800 mb-4">
+                    If you have any questions about these terms of service, please contact us:
+                  </p>
+                  <div className="space-y-2 text-blue-700">
+                    <p><strong>Email:</strong> legal@gehnecservices.com</p>
+                    <p><strong>Phone:</strong> +234 803 123 4567</p>
+                    <p><strong>Address:</strong> Lagos, Nigeria</p>
+                  </div>
+                </div>
+
+                <div className="mt-8 p-4 bg-gray-50 rounded-lg">
+                  <p className="text-sm text-gray-600">
+                    <strong>Last Updated:</strong> March 2024
+                  </p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   )
 } 

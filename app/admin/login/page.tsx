@@ -1,36 +1,60 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { Eye, EyeOff, Shield, Lock } from 'lucide-react'
+import { Eye, EyeOff, Shield, Lock, AlertCircle, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { supabase } from '@/lib/supabase'
 
 export default function AdminLogin() {
   const [credentials, setCredentials] = useState({
-    username: '',
+    email: '',
     password: ''
   })
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
+  const [success, setSuccess] = useState('')
   const router = useRouter()
+
+  useEffect(() => {
+    // Check if user is already authenticated
+    const checkAuth = async () => {
+      const { data: { session } } = await supabase.auth.getSession()
+      if (session) {
+        router.push('/admin')
+      }
+    }
+    checkAuth()
+  }, [router])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     setError('')
+    setSuccess('')
 
-    // Simple authentication (in production, this would be server-side)
-    if (credentials.username === 'admin' && credentials.password === 'ges2024') {
-      // Set admin session
-      localStorage.setItem('adminAuthenticated', 'true')
-      localStorage.setItem('adminUser', credentials.username)
-      
-      // Redirect to admin dashboard
-      router.push('/admin/dashboard')
-    } else {
-      setError('Invalid username or password')
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: credentials.email,
+        password: credentials.password,
+      })
+
+      if (error) {
+        setError(error.message)
+        setIsLoading(false)
+        return
+      }
+
+      if (data.user) {
+        setSuccess('Login successful! Redirecting...')
+        setTimeout(() => {
+          router.push('/admin')
+        }, 1000)
+      }
+    } catch (err) {
+      setError('An unexpected error occurred. Please try again.')
       setIsLoading(false)
     }
   }
@@ -66,20 +90,20 @@ export default function AdminLogin() {
         {/* Login Form */}
         <div className="bg-white rounded-xl sm:rounded-2xl shadow-xl p-6 sm:p-8 border border-gray-200">
           <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
-            {/* Username Field */}
+            {/* Email Field */}
             <div>
-              <label htmlFor="username" className="block text-sm font-medium text-gray-700 mb-2">
-                Username
+              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                Email Address
               </label>
               <div className="relative">
                 <input
-                  type="text"
-                  id="username"
-                  name="username"
-                  value={credentials.username}
+                  type="email"
+                  id="email"
+                  name="email"
+                  value={credentials.email}
                   onChange={handleInputChange}
                   className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition-colors text-sm sm:text-base"
-                  placeholder="Enter your username"
+                  placeholder="Enter your email address"
                   required
                 />
               </div>
@@ -118,7 +142,24 @@ export default function AdminLogin() {
                 animate={{ opacity: 1, y: 0 }}
                 className="bg-red-50 border border-red-200 rounded-lg p-3 sm:p-4"
               >
-                <p className="text-red-600 text-sm">{error}</p>
+                <div className="flex items-center space-x-2">
+                  <AlertCircle className="h-4 w-4 text-red-500" />
+                  <p className="text-red-600 text-sm">{error}</p>
+                </div>
+              </motion.div>
+            )}
+
+            {/* Success Message */}
+            {success && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-green-50 border border-green-200 rounded-lg p-3 sm:p-4"
+              >
+                <div className="flex items-center space-x-2">
+                  <CheckCircle className="h-4 w-4 text-green-500" />
+                  <p className="text-green-600 text-sm">{success}</p>
+                </div>
               </motion.div>
             )}
 
@@ -146,7 +187,7 @@ export default function AdminLogin() {
           <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-blue-50 rounded-lg">
             <h3 className="text-xs sm:text-sm font-medium text-blue-900 mb-2">Demo Credentials</h3>
             <div className="text-xs text-blue-700 space-y-1">
-              <p><strong>Username:</strong> admin</p>
+              <p><strong>Email:</strong> admin@gehnecservices.com</p>
               <p><strong>Password:</strong> ges2024</p>
             </div>
           </div>
