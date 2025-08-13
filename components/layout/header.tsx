@@ -13,6 +13,16 @@ const navigation = [
   { name: 'About', href: '/about' },
   { name: 'Services', href: '/services' },
   { name: 'Impact', href: '/impact' },
+  { name: 'Research', href: '/research' },
+  { name: 'Publications', href: '/publications' },
+  { name: 'Events', href: '/events' },
+  { name: 'Resources', href: '/resources' },
+  { name: 'Partnerships', href: '/partnerships' },
+  { name: 'Careers', href: '/careers' },
+  { name: 'Media', href: '/media' },
+  { name: 'Gallery', href: '/gallery' },
+  { name: 'Testimonials', href: '/testimonials' },
+  { name: 'Blog', href: '/blog' },
   { name: 'Team', href: '/team' },
   { name: 'News', href: '/news' },
   { name: 'Contact', href: '/contact' },
@@ -23,6 +33,8 @@ const services = [
   { name: 'Environmental Consultancy', href: '/services/environmental-consultancy' },
   { name: 'Sanitation Solutions', href: '/services/sanitation' },
   { name: 'Livelihood Programs', href: '/services/livelihood' },
+  { name: 'Training & Capacity Building', href: '/services/training' },
+  { name: 'Impact Assessment', href: '/services/impact-assessment' },
 ]
 
 export function Header() {
