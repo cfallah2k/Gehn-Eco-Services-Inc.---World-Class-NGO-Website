@@ -107,7 +107,6 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
       className="fixed inset-0 z-50 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 flex items-center justify-center"
     >
         <div className="max-w-md w-full mx-4">
@@ -136,7 +135,6 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
             key={currentStep}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -20 }}
             className="bg-white rounded-2xl p-6 shadow-xl border border-gray-100 mb-6"
           >
             <div className="flex items-center space-x-4">
