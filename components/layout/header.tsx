@@ -151,6 +151,19 @@ export function Header() {
         </div>
       </nav>
 
+      {/* Mobile menu backdrop */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="lg:hidden fixed inset-0 bg-black/50 z-30"
+            onClick={() => setMobileMenuOpen(false)}
+          />
+        )}
+      </AnimatePresence>
+
       {/* Mobile menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
@@ -158,18 +171,18 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-white border-b border-gray-200 shadow-lg"
+            className="lg:hidden bg-white border-b border-gray-200 shadow-lg fixed top-[73px] sm:top-[81px] left-0 right-0 z-40 max-h-[calc(100vh-73px)] sm:max-h-[calc(100vh-81px)] overflow-y-auto"
           >
             <div className="container mx-auto px-4 py-4">
-              <div className="space-y-3">
+              <div className="space-y-1">
                 {navigation.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
-                    className={`block text-base font-medium py-2 ${
+                    className={`block text-base font-medium py-3 px-3 rounded-lg transition-colors ${
                       pathname === item.href
-                        ? 'text-primary-600'
-                        : 'text-secondary-700 hover:text-primary-600'
+                        ? 'text-primary-600 bg-primary-50'
+                        : 'text-secondary-700 hover:text-primary-600 hover:bg-gray-50'
                     }`}
                     onClick={() => setMobileMenuOpen(false)}
                   >
@@ -178,16 +191,16 @@ export function Header() {
                 ))}
                 <div className="pt-3 border-t border-gray-200 space-y-2">
                   <Button variant="ghost" asChild className="w-full justify-start">
-                    <Link href="/donate">Donate</Link>
+                    <Link href="/donate" onClick={() => setMobileMenuOpen(false)}>Donate</Link>
                   </Button>
                   <Button variant="outline" asChild className="w-full justify-start">
-                    <Link href="/admin/login" className="flex items-center justify-start space-x-2">
+                    <Link href="/admin/login" className="flex items-center justify-start space-x-2" onClick={() => setMobileMenuOpen(false)}>
                       <Shield className="w-4 h-4" />
                       <span>Admin Portal</span>
                     </Link>
                   </Button>
                   <Button asChild className="w-full justify-start">
-                    <Link href="/contact">Get Started</Link>
+                    <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>Get Started</Link>
                   </Button>
                 </div>
               </div>

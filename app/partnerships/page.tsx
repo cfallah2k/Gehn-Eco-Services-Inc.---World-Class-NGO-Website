@@ -11,7 +11,8 @@ import {
   Globe,
   Calendar,
   ExternalLink,
-  Building2
+  Building2,
+  DollarSign
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'

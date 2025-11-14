@@ -160,11 +160,12 @@ export default function NewsPage() {
               className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100"
             >
               <div className="grid lg:grid-cols-2">
-                <div className="relative h-64 lg:h-full">
+                <div className="relative h-64 lg:h-full min-h-[300px]">
                   <img
                     src={article.image}
                     alt={article.title}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                   <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 bg-primary-600 text-white rounded-full text-sm font-medium">
@@ -234,11 +235,12 @@ export default function NewsPage() {
                 transition={{ delay: index * 0.1, duration: 0.6 }}
                 className="bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100 hover:shadow-xl transition-shadow"
               >
-                <div className="relative h-48">
+                <div className="relative h-48 min-h-[200px]">
                   <img
                     src={article.image}
                     alt={article.title}
                     className="w-full h-full object-cover"
+                    loading="lazy"
                   />
                   <div className="absolute top-4 left-4">
                     <span className="px-3 py-1 bg-primary-600 text-white rounded-full text-sm font-medium">

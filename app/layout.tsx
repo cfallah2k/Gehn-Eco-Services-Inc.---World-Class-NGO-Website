@@ -4,6 +4,7 @@ import './globals.css'
 import { ThemeProvider } from '@/components/theme-provider'
 import { LayoutWrapper } from '@/components/layout-wrapper'
 import { Analytics } from '@/components/analytics'
+import { PWAInstall } from '@/components/pwa-install'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -91,6 +92,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#16a34a" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="GES" />
+        <link rel="apple-touch-icon" href="/icon-192x192.png" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, viewport-fit=cover" />
+      </head>
       <body className={`${inter.variable} ${poppins.variable} font-sans antialiased`}>
         <ThemeProvider
           attribute="class"
@@ -102,6 +113,7 @@ export default function RootLayout({
             {children}
           </LayoutWrapper>
           <Analytics />
+          <PWAInstall />
         </ThemeProvider>
       </body>
     </html>

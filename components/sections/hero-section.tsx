@@ -234,7 +234,7 @@ export function HeroSection() {
           className="w-5 h-8 sm:w-6 sm:h-10 border-2 border-secondary-300 rounded-full flex justify-center"
         >
           <motion.div
-            animate={{ y: [0, 10, 0] sm: [0, 12, 0] }}
+            animate={{ y: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity }}
             className="w-0.5 h-2 sm:h-3 bg-secondary-400 rounded-full mt-1.5 sm:mt-2"
           />
