@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { motion as Motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import { 
   Leaf, 
   Users, 
@@ -104,14 +104,14 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
   }, [onComplete])
 
   return (
-    <Motion.div
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       className="fixed inset-0 z-50 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50 flex items-center justify-center"
     >
         <div className="max-w-md w-full mx-4">
           {/* Logo and Title */}
-          <Motion.div
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-8"
@@ -128,10 +128,10 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
             <p className="text-gray-600 text-sm">
               Women-led social enterprise transforming environmental health
             </p>
-          </Motion.div>
+          </motion.div>
 
           {/* Current Step */}
-          <Motion.div
+          <motion.div
             key={currentStep}
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -150,7 +150,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
                 </p>
               </div>
             </div>
-          </Motion.div>
+          </motion.div>
 
           {/* Progress Bar */}
           <div className="bg-white rounded-2xl p-6 shadow-xl border border-gray-100">
@@ -159,7 +159,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
               <span className="text-sm font-medium text-gray-500">{Math.round(progress)}%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-2">
-              <Motion.div
+              <motion.div
                 className="bg-gradient-to-r from-green-500 to-blue-600 h-2 rounded-full"
                 initial={{ width: 0 }}
                 animate={{ width: `${progress}%` }}
@@ -171,7 +171,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
             <div className="flex justify-center mt-4">
               <div className="flex space-x-1">
                 {[0, 1, 2].map((i) => (
-                  <Motion.div
+                  <motion.div
                     key={i}
                     className="w-2 h-2 bg-green-500 rounded-full"
                     animate={{
@@ -190,7 +190,7 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
           </div>
 
           {/* Fun Facts */}
-          <Motion.div
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
@@ -199,8 +199,8 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
             <p className="text-xs text-gray-500">
               Did you know? We've helped over 10,000 families improve their environmental health
             </p>
-          </Motion.div>
+          </motion.div>
         </div>
-      </Motion.div>
+      </motion.div>
   )
 } 
