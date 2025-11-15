@@ -154,7 +154,7 @@ export function Header() {
     }`}>
       {/* Top bar - Hidden on mobile */}
       <div className="hidden sm:block bg-primary-600 text-white py-2">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           <div className="flex items-center justify-between text-sm">
             <div className="flex items-center space-x-2 sm:space-x-4">
               <div className="flex items-center space-x-2">
@@ -179,7 +179,7 @@ export function Header() {
 
       {/* Main navigation */}
       <nav className="border-b border-gray-200 bg-white">
-        <div className="container mx-auto px-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           <div className="flex items-center justify-between h-14 sm:h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
@@ -271,7 +271,7 @@ export function Header() {
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden bg-white border-b border-gray-200 shadow-lg fixed top-[73px] sm:top-[81px] left-0 right-0 z-40 max-h-[calc(100vh-73px)] sm:max-h-[calc(100vh-81px)] overflow-y-auto"
           >
-            <div className="container mx-auto px-4 py-4">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-4">
               <div className="space-y-1">
                 {/* Main Navigation */}
                 {mainNavigation.map((item) => (

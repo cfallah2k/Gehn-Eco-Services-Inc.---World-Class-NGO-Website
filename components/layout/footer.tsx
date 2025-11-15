@@ -59,8 +59,8 @@ export function Footer() {
   return (
     <footer className="bg-secondary-900 text-white">
       {/* Main Footer */}
-      <div className="container mx-auto px-4 py-12 sm:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 py-12 sm:py-16 lg:py-20">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-10 xl:gap-12">
           {/* Company Info */}
           <div className="sm:col-span-2 lg:col-span-2">
             <div className="flex items-center space-x-2 mb-4 sm:mb-6">
@@ -157,13 +157,29 @@ export function Footer() {
               ))}
             </ul>
           </div>
+
+          <div>
+            <h3 className="font-semibold text-base sm:text-lg mb-3 sm:mb-4">Resources</h3>
+            <ul className="space-y-2 sm:space-y-3">
+              {footerLinks.resources.map((link) => (
+                <li key={link.name}>
+                  <Link 
+                    href={link.href}
+                    className="text-secondary-300 hover:text-primary-400 transition-colors text-sm sm:text-base"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
       {/* Newsletter Section */}
-      <div className="border-t border-secondary-800 py-8 sm:py-12">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 items-center">
+      <div className="border-t border-secondary-800 py-8 sm:py-12 lg:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
             <div>
               <h3 className="text-xl sm:text-2xl font-bold mb-2">Stay Updated</h3>
               <p className="text-secondary-300 text-sm sm:text-base">
@@ -189,8 +205,8 @@ export function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-secondary-800 py-4 sm:py-6">
-        <div className="container mx-auto px-4">
+      <div className="border-t border-secondary-800 py-4 sm:py-6 lg:py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           <div className="flex flex-col sm:flex-row justify-between items-center space-y-3 sm:space-y-0">
             <div className="flex items-center space-x-2 text-secondary-400 text-xs sm:text-sm">
               <span>© 2024 Gehn Eco Services Inc. All rights reserved.</span>
