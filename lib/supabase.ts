@@ -113,6 +113,152 @@ export interface Database {
           created_at?: string
         }
       }
+      news_articles: {
+        Row: {
+          id: string
+          title: string
+          excerpt?: string
+          content?: string
+          image_url?: string
+          author: string
+          category: string
+          featured: boolean
+          published: boolean
+          read_time: number
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          title: string
+          excerpt?: string
+          content?: string
+          image_url?: string
+          author: string
+          category: string
+          featured?: boolean
+          published?: boolean
+          read_time?: number
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          title?: string
+          excerpt?: string
+          content?: string
+          image_url?: string
+          author?: string
+          category?: string
+          featured?: boolean
+          published?: boolean
+          read_time?: number
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      team_members: {
+        Row: {
+          id: string
+          name: string
+          role: string
+          bio?: string
+          image_url?: string
+          email?: string
+          linkedin_url?: string
+          expertise?: string[]
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          role: string
+          bio?: string
+          image_url?: string
+          email?: string
+          linkedin_url?: string
+          expertise?: string[]
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          role?: string
+          bio?: string
+          image_url?: string
+          email?: string
+          linkedin_url?: string
+          expertise?: string[]
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      impact_stories: {
+        Row: {
+          id: string
+          title: string
+          description?: string
+          location?: string
+          impact_metrics?: string[]
+          image_url?: string
+          featured: boolean
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          title: string
+          description?: string
+          location?: string
+          impact_metrics?: string[]
+          image_url?: string
+          featured?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          title?: string
+          description?: string
+          location?: string
+          impact_metrics?: string[]
+          image_url?: string
+          featured?: boolean
+          created_at?: string
+          updated_at?: string
+        }
+      }
+      services: {
+        Row: {
+          id: string
+          name: string
+          description?: string
+          icon?: string
+          features?: string[]
+          created_at: string
+          updated_at: string
+        }
+        Insert: {
+          id?: string
+          name: string
+          description?: string
+          icon?: string
+          features?: string[]
+          created_at?: string
+          updated_at?: string
+        }
+        Update: {
+          id?: string
+          name?: string
+          description?: string
+          icon?: string
+          features?: string[]
+          created_at?: string
+          updated_at?: string
+        }
+      }
     }
   }
 } 
