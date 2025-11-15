@@ -66,7 +66,7 @@ export function HeroSection() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute top-20 left-10 w-16 h-16 md:w-20 md:h-20 bg-primary-200 rounded-full opacity-20"
+          className="absolute top-20 left-4 md:left-10 w-16 h-16 md:w-20 md:h-20 bg-primary-200 rounded-full opacity-20"
         />
         <motion.div
           animate={{
@@ -78,7 +78,7 @@ export function HeroSection() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute top-40 right-20 w-12 h-12 md:w-16 md:h-16 bg-accent-200 rounded-full opacity-20"
+          className="absolute top-40 right-4 md:right-20 w-12 h-12 md:w-16 md:h-16 bg-accent-200 rounded-full opacity-20"
         />
         <motion.div
           animate={{
@@ -90,18 +90,18 @@ export function HeroSection() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="absolute bottom-40 left-20 w-10 h-10 md:w-12 md:h-12 bg-secondary-200 rounded-full opacity-20"
+          className="absolute bottom-40 left-4 md:left-20 w-10 h-10 md:w-12 md:h-12 bg-secondary-200 rounded-full opacity-20"
         />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen py-20">
+      <div className="container mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center min-h-screen py-16 sm:py-20 md:py-24 lg:py-32">
           {/* Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-6 lg:space-y-8"
+            className="space-y-6 lg:space-y-8 max-w-2xl"
           >
             <div className="space-y-4">
               <motion.div
@@ -187,11 +187,11 @@ export function HeroSection() {
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="relative hidden lg:block"
+            className="relative hidden lg:block w-full max-w-lg mx-auto"
           >
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-br from-primary-400 to-accent-400 rounded-3xl transform rotate-6 scale-105 opacity-20" />
-              <div className="relative bg-white rounded-3xl shadow-2xl p-6 sm:p-8">
+              <div className="relative bg-white rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8">
                 <div className="aspect-square relative overflow-hidden rounded-2xl">
                   <Image
                     src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2126&q=80"
@@ -213,7 +213,7 @@ export function HeroSection() {
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="absolute -bottom-6 -left-6 bg-white rounded-full p-3 sm:p-4 shadow-lg"
+              className="absolute -bottom-4 -left-4 md:-bottom-6 md:-left-6 bg-white rounded-full p-3 sm:p-4 shadow-lg z-10"
             >
               <Play className="h-5 w-5 sm:h-6 sm:w-6 text-primary-600 ml-0.5 sm:ml-1" />
             </motion.button>

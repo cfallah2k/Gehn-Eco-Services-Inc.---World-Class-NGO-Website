@@ -1,18 +1,34 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Menu, X, ChevronDown, Globe, Phone, Mail, Shield } from 'lucide-react'
+import { Menu, X, ChevronDown, Globe, Phone, Mail, Shield, Heart, UserPlus, type LucideIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { ThemeToggle } from '@/components/theme-toggle'
 
-const navigation = [
+// Main navigation items (always visible)
+const mainNavigation = [
   { name: 'Home', href: '/' },
   { name: 'About', href: '/about' },
-  { name: 'Services', href: '/services' },
   { name: 'Impact', href: '/impact' },
+  { name: 'Contact', href: '/contact' },
+]
+
+// Services dropdown items
+const services = [
+  { name: 'All Services', href: '/services' },
+  { name: 'Waste Management', href: '/services/waste-management' },
+  { name: 'Environmental Consultancy', href: '/services/environmental-consultancy' },
+  { name: 'Sanitation Solutions', href: '/services/sanitation' },
+  { name: 'Livelihood Programs', href: '/services/livelihood' },
+  { name: 'Training & Capacity Building', href: '/services/training' },
+  { name: 'Impact Assessment', href: '/services/impact-assessment' },
+]
+
+// More dropdown items (secondary navigation)
+const moreItems = [
   { name: 'Research', href: '/research' },
   { name: 'Publications', href: '/publications' },
   { name: 'Events', href: '/events' },
@@ -25,20 +41,102 @@ const navigation = [
   { name: 'Blog', href: '/blog' },
   { name: 'Team', href: '/team' },
   { name: 'News', href: '/news' },
-  { name: 'Contact', href: '/contact' },
 ]
 
-const services = [
-  { name: 'Waste Management', href: '/services/waste-management' },
-  { name: 'Environmental Consultancy', href: '/services/environmental-consultancy' },
-  { name: 'Sanitation Solutions', href: '/services/sanitation' },
-  { name: 'Livelihood Programs', href: '/services/livelihood' },
-  { name: 'Training & Capacity Building', href: '/services/training' },
-  { name: 'Impact Assessment', href: '/services/impact-assessment' },
+// Actions dropdown items
+const actionItems = [
+  { name: 'Donate', href: '/donate', icon: Heart },
+  { name: 'Volunteer', href: '/volunteer', icon: UserPlus },
+  { name: 'Admin Portal', href: '/admin/login', icon: Shield },
 ]
+
+// Dropdown component
+function Dropdown({ label, items, pathname }: { label: string; items: Array<{ name: string; href: string; icon?: LucideIcon }>; pathname: string }) {
+  const [isOpen, setIsOpen] = useState(false)
+  const dropdownRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false)
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [isOpen])
+
+  const isActive = items.some(item => pathname === item.href)
+
+  const isActionsDropdown = label === 'Actions'
+
+  return (
+    <div className="relative" ref={dropdownRef}>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`flex items-center space-x-1 text-sm font-medium transition-colors ${
+          isActionsDropdown
+            ? 'px-3 py-1.5 rounded-md border border-gray-300 bg-white hover:bg-gray-50 text-secondary-700'
+            : isActive
+            ? 'text-primary-600'
+            : 'text-secondary-700 hover:text-primary-600'
+        }`}
+      >
+        <span>{label}</span>
+        <ChevronDown className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-10"
+              onClick={() => setIsOpen(false)}
+            />
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="absolute top-full left-0 mt-2 w-56 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-20"
+            >
+              {items.map((item) => {
+                const Icon = item.icon
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center space-x-2 px-4 py-2 text-sm transition-colors ${
+                      pathname === item.href
+                        ? 'bg-primary-50 text-primary-600'
+                        : 'text-secondary-700 hover:bg-gray-50 hover:text-primary-600'
+                    }`}
+                  >
+                    {Icon && <Icon className="w-4 h-4" />}
+                    <span>{item.name}</span>
+                  </Link>
+                )
+              })}
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [servicesOpen, setServicesOpen] = useState(false)
+  const [moreOpen, setMoreOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const pathname = usePathname()
 
@@ -103,7 +201,7 @@ export function Header() {
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-              {navigation.map((item) => (
+              {mainNavigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
@@ -116,22 +214,22 @@ export function Header() {
                   {item.name}
                 </Link>
               ))}
+              
+              {/* Services Dropdown */}
+              <Dropdown label="Services" items={services} pathname={pathname} />
+              
+              {/* More Dropdown */}
+              <Dropdown label="More" items={moreItems} pathname={pathname} />
             </div>
 
-            {/* CTA Buttons - Desktop */}
+            {/* Actions Dropdown - Desktop */}
             <div className="hidden lg:flex items-center space-x-3">
-              <Button variant="ghost" size="sm" asChild>
-                <Link href="/donate">Donate</Link>
-              </Button>
-              <Button variant="outline" size="sm" asChild>
-                <Link href="/admin/login" className="flex items-center space-x-2">
-                  <Shield className="w-4 h-4" />
-                  <span>Admin Portal</span>
-                </Link>
-              </Button>
               <Button size="sm" asChild>
                 <Link href="/contact">Get Started</Link>
               </Button>
+              <div className="relative">
+                <Dropdown label="Actions" items={actionItems} pathname={pathname} />
+              </div>
             </div>
 
             {/* Mobile menu button */}
@@ -175,7 +273,8 @@ export function Header() {
           >
             <div className="container mx-auto px-4 py-4">
               <div className="space-y-1">
-                {navigation.map((item) => (
+                {/* Main Navigation */}
+                {mainNavigation.map((item) => (
                   <Link
                     key={item.name}
                     href={item.href}
@@ -189,19 +288,110 @@ export function Header() {
                     {item.name}
                   </Link>
                 ))}
+
+                {/* Services Dropdown */}
+                <div className="pt-2">
+                  <button
+                    onClick={() => setServicesOpen(!servicesOpen)}
+                    className="w-full flex items-center justify-between text-base font-medium py-3 px-3 rounded-lg text-secondary-700 hover:text-primary-600 hover:bg-gray-50"
+                  >
+                    <span>Services</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  <AnimatePresence>
+                    {servicesOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden pl-4"
+                      >
+                        {services.map((item) => (
+                          <Link
+                            key={item.name}
+                            href={item.href}
+                            className={`block text-sm py-2 px-3 rounded-lg transition-colors ${
+                              pathname === item.href
+                                ? 'text-primary-600 bg-primary-50'
+                                : 'text-secondary-600 hover:text-primary-600 hover:bg-gray-50'
+                            }`}
+                            onClick={() => {
+                              setMobileMenuOpen(false)
+                              setServicesOpen(false)
+                            }}
+                          >
+                            {item.name}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {/* More Dropdown */}
+                <div className="pt-2">
+                  <button
+                    onClick={() => setMoreOpen(!moreOpen)}
+                    className="w-full flex items-center justify-between text-base font-medium py-3 px-3 rounded-lg text-secondary-700 hover:text-primary-600 hover:bg-gray-50"
+                  >
+                    <span>More</span>
+                    <ChevronDown className={`w-4 h-4 transition-transform ${moreOpen ? 'rotate-180' : ''}`} />
+                  </button>
+                  <AnimatePresence>
+                    {moreOpen && (
+                      <motion.div
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: 'auto', opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        className="overflow-hidden pl-4"
+                      >
+                        {moreItems.map((item) => (
+                          <Link
+                            key={item.name}
+                            href={item.href}
+                            className={`block text-sm py-2 px-3 rounded-lg transition-colors ${
+                              pathname === item.href
+                                ? 'text-primary-600 bg-primary-50'
+                                : 'text-secondary-600 hover:text-primary-600 hover:bg-gray-50'
+                            }`}
+                            onClick={() => {
+                              setMobileMenuOpen(false)
+                              setMoreOpen(false)
+                            }}
+                          >
+                            {item.name}
+                          </Link>
+                        ))}
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
+
+                {/* Actions */}
                 <div className="pt-3 border-t border-gray-200 space-y-2">
-                  <Button variant="ghost" asChild className="w-full justify-start">
-                    <Link href="/donate" onClick={() => setMobileMenuOpen(false)}>Donate</Link>
-                  </Button>
-                  <Button variant="outline" asChild className="w-full justify-start">
-                    <Link href="/admin/login" className="flex items-center justify-start space-x-2" onClick={() => setMobileMenuOpen(false)}>
-                      <Shield className="w-4 h-4" />
-                      <span>Admin Portal</span>
-                    </Link>
-                  </Button>
                   <Button asChild className="w-full justify-start">
                     <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>Get Started</Link>
                   </Button>
+                  {actionItems.map((item) => {
+                    const Icon = item.icon
+                    return (
+                      <Button
+                        key={item.name}
+                        variant={item.name === 'Admin Portal' ? 'outline' : 'ghost'}
+                        asChild
+                        className="w-full justify-start"
+                      >
+                        <Link
+                          href={item.href}
+                          className="flex items-center space-x-2"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {Icon && <Icon className="w-4 h-4" />}
+                          <span>{item.name}</span>
+                        </Link>
+                      </Button>
+                    )
+                  })}
                 </div>
               </div>
             </div>

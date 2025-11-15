@@ -6,7 +6,7 @@ import { CTASection } from '@/components/sections/cta-section'
 
 export default function HomePage() {
   return (
-    <div className="space-y-0">
+    <div className="space-y-0 overflow-x-hidden">
       <HeroSection />
       <AboutSection />
       <ServicesSection />

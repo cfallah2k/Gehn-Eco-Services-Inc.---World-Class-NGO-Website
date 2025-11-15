@@ -46,7 +46,7 @@ export function AboutSection() {
   return (
     <section className="section-padding section-gradient" ref={ref}>
       <div className="container-custom">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-center">
           {/* Content */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}

@@ -121,7 +121,7 @@ export function ImpactSection() {
           initial={{ opacity: 0, y: 50 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ delay: 0.8, duration: 0.8 }}
-          className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16"
+          className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 lg:gap-10 mb-16"
         >
           {impactStats.map((stat, index) => (
             <div key={index} className="text-center">
