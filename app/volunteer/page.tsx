@@ -1,4 +1,5 @@
-import type { Metadata } from 'next'
+'use client'
+
 import { motion } from 'framer-motion'
 import { 
   Heart, 
@@ -15,12 +16,6 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-
-export const metadata: Metadata = {
-  title: 'Volunteer With Us - Gehn Eco Services Inc.',
-  description: 'Join our volunteer program and make a difference in environmental sustainability and community empowerment.',
-  keywords: ['volunteer', 'environmental', 'community', 'sustainability', 'social impact'],
-}
 
 const volunteerOpportunities = [
   {

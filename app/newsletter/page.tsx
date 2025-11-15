@@ -1,4 +1,5 @@
-import type { Metadata } from 'next'
+'use client'
+
 import { motion } from 'framer-motion'
 import { 
   Mail, 
@@ -13,12 +14,6 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-
-export const metadata: Metadata = {
-  title: 'Newsletter Subscription - Gehn Eco Services Inc.',
-  description: 'Subscribe to our newsletter for the latest updates on environmental initiatives, success stories, and opportunities.',
-  keywords: ['newsletter', 'subscribe', 'updates', 'environmental', 'news'],
-}
 
 const benefits = [
   {

@@ -1,3 +1,5 @@
+'use client'
+
 import { motion } from 'framer-motion'
 import { FileText, Shield, Users, Globe, AlertTriangle } from 'lucide-react'
 

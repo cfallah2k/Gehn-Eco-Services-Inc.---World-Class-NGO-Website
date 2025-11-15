@@ -1,4 +1,5 @@
-import type { Metadata } from 'next'
+'use client'
+
 import { motion } from 'framer-motion'
 import { 
   FileText, 
@@ -13,12 +14,6 @@ import {
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
-
-export const metadata: Metadata = {
-  title: 'Annual Reports & Publications - Gehn Eco Services Inc.',
-  description: 'Access our annual reports, impact assessments, and publications documenting our environmental initiatives and community impact.',
-  keywords: ['reports', 'annual report', 'impact assessment', 'publications', 'sustainability'],
-}
 
 const annualReports = [
   {

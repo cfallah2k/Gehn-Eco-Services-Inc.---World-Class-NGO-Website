@@ -1,3 +1,5 @@
+'use client'
+
 import { motion } from 'framer-motion'
 import { Cookie, Settings, Shield, Eye, Info } from 'lucide-react'
 
