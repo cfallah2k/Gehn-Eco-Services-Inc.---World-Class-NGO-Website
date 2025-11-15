@@ -1,452 +1,499 @@
-import { supabase } from './supabase'
-import type { Database } from './supabase'
+// API Layer - Mock Implementation
+// TODO: Replace with actual backend API calls when backend is ready
+// This file provides a clean interface that can be easily swapped with real API calls
 
-// Type definitions
-export type User = Database['public']['Tables']['users']['Row']
-export type Donation = Database['public']['Tables']['donations']['Row']
-export type ContactMessage = Database['public']['Tables']['contact_messages']['Row']
-export type NewsletterSubscriber = Database['public']['Tables']['newsletter_subscribers']['Row']
-export type NewsArticle = Database['public']['Tables']['news_articles']['Row']
-export type TeamMember = Database['public']['Tables']['team_members']['Row']
-export type ImpactStory = Database['public']['Tables']['impact_stories']['Row']
-export type Service = Database['public']['Tables']['services']['Row']
+import type {
+  User,
+  Donation,
+  ContactMessage,
+  NewsletterSubscriber,
+  NewsArticle,
+  TeamMember,
+  ImpactStory,
+  Service,
+  ApiResponse,
+  AuthSession
+} from './types'
 
-// Authentication functions
+// Mock data - Replace with API calls when backend is ready
+const mockTeamMembers: TeamMember[] = [
+  {
+    id: '1',
+    name: 'Dr. Sarah Johnson',
+    role: 'Founder & CEO',
+    bio: 'Environmental scientist with 20+ years experience in waste management and community development.',
+    image_url: 'https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400',
+    email: 'sarah@gehnecservices.com',
+    linkedin_url: '#',
+    expertise: ['Environmental Science', 'Waste Management', 'Community Development'],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
+  }
+]
+
+const mockServices: Service[] = [
+  {
+    id: '1',
+    name: 'Waste Management',
+    description: 'Comprehensive waste collection, sorting, and recycling services',
+    icon: 'trash',
+    features: ['Community waste collection', 'Recycling programs', 'Waste reduction strategies'],
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
+  }
+]
+
+const mockImpactStories: ImpactStory[] = [
+  {
+    id: '1',
+    title: 'Community Waste Management Initiative',
+    description: 'Implemented comprehensive waste management system in underserved communities',
+    location: 'Lagos, Nigeria',
+    impact_metrics: ['60% waste reduction', '50 new jobs created', '10,000+ people served'],
+    image_url: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800',
+    featured: true,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
+  }
+]
+
+const mockNewsArticles: NewsArticle[] = [
+  {
+    id: '1',
+    title: 'Gehn Eco Services Launches New Initiative',
+    excerpt: 'Our latest community-based waste management program has successfully reduced waste by 60%',
+    content: 'Full article content...',
+    image_url: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800',
+    author: 'Sarah Johnson',
+    category: 'Programs',
+    featured: true,
+    published: true,
+    read_time: 5,
+    created_at: new Date().toISOString(),
+    updated_at: new Date().toISOString()
+  }
+]
+
+// Authentication functions - Mock implementation
 export const auth = {
-  // Sign in with email and password
-  signIn: async (email: string, password: string) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    })
-    return { data, error }
+  signIn: async (email: string, password: string): Promise<ApiResponse<AuthSession>> => {
+    // Mock authentication - Replace with actual API call
+    // For demo purposes, accept any credentials
+    await new Promise(resolve => setTimeout(resolve, 500)) // Simulate API delay
+    
+    if (email && password) {
+      return {
+        data: {
+          user: {
+            id: '1',
+            email,
+            name: 'Admin User',
+            role: 'admin',
+            created_at: new Date().toISOString(),
+            updated_at: new Date().toISOString()
+          },
+          token: 'mock-token',
+          expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString()
+        },
+        error: null
+      }
+    }
+    
+    return {
+      data: null,
+      error: { message: 'Invalid credentials' }
+    }
   },
 
-  // Sign out
-  signOut: async () => {
-    const { error } = await supabase.auth.signOut()
-    return { error }
+  signOut: async (): Promise<ApiResponse<null>> => {
+    await new Promise(resolve => setTimeout(resolve, 200))
+    return { data: null, error: null }
   },
 
-  // Get current session
-  getSession: async () => {
-    const { data: { session }, error } = await supabase.auth.getSession()
-    return { session, error }
+  getSession: async (): Promise<ApiResponse<AuthSession | null>> => {
+    // Check localStorage for mock session
+    if (typeof window !== 'undefined') {
+      const session = localStorage.getItem('mock_session')
+      if (session) {
+        return { data: JSON.parse(session), error: null }
+      }
+    }
+    return { data: null, error: null }
   },
 
-  // Get current user
-  getUser: async () => {
-    const { data: { user }, error } = await supabase.auth.getUser()
-    return { user, error }
+  getUser: async (): Promise<ApiResponse<User | null>> => {
+    const sessionResult = await auth.getSession()
+    if (sessionResult.data) {
+      return { data: sessionResult.data.user, error: null }
+    }
+    return { data: null, error: null }
   }
 }
 
-// Contact form functions
+// Contact form functions - Mock implementation
 export const contact = {
-  // Submit contact form
-  submitMessage: async (message: Omit<ContactMessage, 'id' | 'status' | 'created_at'>) => {
-    const { data, error } = await supabase
-      .from('contact_messages')
-      .insert([message])
-      .select()
-      .single()
+  submitMessage: async (
+    message: Omit<ContactMessage, 'id' | 'status' | 'created_at'>
+  ): Promise<ApiResponse<ContactMessage>> => {
+    await new Promise(resolve => setTimeout(resolve, 500))
     
-    return { data, error }
+    const newMessage: ContactMessage = {
+      id: Date.now().toString(),
+      ...message,
+      status: 'unread',
+      created_at: new Date().toISOString()
+    }
+    
+    // In a real app, this would be stored in localStorage or sent to backend
+    console.log('Contact message submitted:', newMessage)
+    
+    return { data: newMessage, error: null }
   },
 
-  // Get all contact messages (admin only)
-  getAllMessages: async () => {
-    const { data, error } = await supabase
-      .from('contact_messages')
-      .select('*')
-      .order('created_at', { ascending: false })
-    
-    return { data, error }
+  getAllMessages: async (): Promise<ApiResponse<ContactMessage[]>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return { data: [], error: null }
   },
 
-  // Update message status (admin only)
-  updateMessageStatus: async (id: string, status: ContactMessage['status']) => {
-    const { data, error } = await supabase
-      .from('contact_messages')
-      .update({ status })
-      .eq('id', id)
-      .select()
-      .single()
-    
-    return { data, error }
+  updateMessageStatus: async (
+    id: string,
+    status: ContactMessage['status']
+  ): Promise<ApiResponse<ContactMessage>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return {
+      data: {
+        id,
+        name: '',
+        email: '',
+        subject: '',
+        message: '',
+        status,
+        created_at: new Date().toISOString()
+      },
+      error: null
+    }
   }
 }
 
-// Newsletter functions
+// Newsletter functions - Mock implementation
 export const newsletter = {
-  // Subscribe to newsletter
-  subscribe: async (email: string) => {
-    const { data, error } = await supabase
-      .from('newsletter_subscribers')
-      .insert([{ email }])
-      .select()
-      .single()
+  subscribe: async (email: string): Promise<ApiResponse<NewsletterSubscriber>> => {
+    await new Promise(resolve => setTimeout(resolve, 500))
     
-    return { data, error }
+    const subscriber: NewsletterSubscriber = {
+      id: Date.now().toString(),
+      email,
+      status: 'active',
+      created_at: new Date().toISOString()
+    }
+    
+    console.log('Newsletter subscription:', subscriber)
+    
+    return { data: subscriber, error: null }
   },
 
-  // Unsubscribe from newsletter
-  unsubscribe: async (email: string) => {
-    const { data, error } = await supabase
-      .from('newsletter_subscribers')
-      .update({ status: 'unsubscribed' })
-      .eq('email', email)
-      .select()
-      .single()
-    
-    return { data, error }
+  unsubscribe: async (email: string): Promise<ApiResponse<NewsletterSubscriber>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return {
+      data: {
+        id: '1',
+        email,
+        status: 'unsubscribed',
+        created_at: new Date().toISOString()
+      },
+      error: null
+    }
   },
 
-  // Get all subscribers (admin only)
-  getAllSubscribers: async () => {
-    const { data, error } = await supabase
-      .from('newsletter_subscribers')
-      .select('*')
-      .order('created_at', { ascending: false })
-    
-    return { data, error }
+  getAllSubscribers: async (): Promise<ApiResponse<NewsletterSubscriber[]>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return { data: [], error: null }
   }
 }
 
-// Donations functions
+// Donations functions - Mock implementation
 export const donations = {
-  // Submit donation
-  submitDonation: async (donation: Omit<Donation, 'id' | 'status' | 'created_at'>) => {
-    const { data, error } = await supabase
-      .from('donations')
-      .insert([donation])
-      .select()
-      .single()
+  submitDonation: async (
+    donation: Omit<Donation, 'id' | 'status' | 'created_at'>
+  ): Promise<ApiResponse<Donation>> => {
+    await new Promise(resolve => setTimeout(resolve, 500))
     
-    return { data, error }
+    const newDonation: Donation = {
+      id: Date.now().toString(),
+      ...donation,
+      status: 'pending',
+      created_at: new Date().toISOString()
+    }
+    
+    console.log('Donation submitted:', newDonation)
+    
+    return { data: newDonation, error: null }
   },
 
-  // Get all donations (admin only)
-  getAllDonations: async () => {
-    const { data, error } = await supabase
-      .from('donations')
-      .select('*')
-      .order('created_at', { ascending: false })
-    
-    return { data, error }
+  getAllDonations: async (): Promise<ApiResponse<Donation[]>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return { data: [], error: null }
   },
 
-  // Update donation status (admin only)
-  updateDonationStatus: async (id: string, status: Donation['status']) => {
-    const { data, error } = await supabase
-      .from('donations')
-      .update({ status })
-      .eq('id', id)
-      .select()
-      .single()
-    
-    return { data, error }
+  updateDonationStatus: async (
+    id: string,
+    status: Donation['status']
+  ): Promise<ApiResponse<Donation>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return {
+      data: {
+        id,
+        donor_name: '',
+        email: '',
+        amount: 0,
+        status,
+        created_at: new Date().toISOString()
+      },
+      error: null
+    }
   }
 }
 
-// News articles functions
+// News articles functions - Mock implementation
 export const news = {
-  // Get all published articles
-  getPublishedArticles: async () => {
-    const { data, error } = await supabase
-      .from('news_articles')
-      .select('*')
-      .eq('published', true)
-      .order('created_at', { ascending: false })
-    
-    return { data, error }
+  getPublishedArticles: async (): Promise<ApiResponse<NewsArticle[]>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return { data: mockNewsArticles.filter(a => a.published), error: null }
   },
 
-  // Get featured articles
-  getFeaturedArticles: async () => {
-    const { data, error } = await supabase
-      .from('news_articles')
-      .select('*')
-      .eq('published', true)
-      .eq('featured', true)
-      .order('created_at', { ascending: false })
-    
-    return { data, error }
+  getFeaturedArticles: async (): Promise<ApiResponse<NewsArticle[]>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return {
+      data: mockNewsArticles.filter(a => a.published && a.featured),
+      error: null
+    }
   },
 
-  // Get article by ID
-  getArticleById: async (id: string) => {
-    const { data, error } = await supabase
-      .from('news_articles')
-      .select('*')
-      .eq('id', id)
-      .eq('published', true)
-      .single()
-    
-    return { data, error }
+  getArticleById: async (id: string): Promise<ApiResponse<NewsArticle>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    const article = mockNewsArticles.find(a => a.id === id && a.published)
+    if (article) {
+      return { data: article, error: null }
+    }
+    return { data: null, error: { message: 'Article not found' } }
   },
 
-  // Create new article (admin only)
-  createArticle: async (article: Omit<NewsArticle, 'id' | 'created_at' | 'updated_at'>) => {
-    const { data, error } = await supabase
-      .from('news_articles')
-      .insert([article])
-      .select()
-      .single()
-    
-    return { data, error }
+  createArticle: async (
+    article: Omit<NewsArticle, 'id' | 'created_at' | 'updated_at'>
+  ): Promise<ApiResponse<NewsArticle>> => {
+    await new Promise(resolve => setTimeout(resolve, 500))
+    const newArticle: NewsArticle = {
+      id: Date.now().toString(),
+      ...article,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    }
+    return { data: newArticle, error: null }
   },
 
-  // Update article (admin only)
-  updateArticle: async (id: string, updates: Partial<NewsArticle>) => {
-    const { data, error } = await supabase
-      .from('news_articles')
-      .update({ ...updates, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .select()
-      .single()
-    
-    return { data, error }
+  updateArticle: async (
+    id: string,
+    updates: Partial<NewsArticle>
+  ): Promise<ApiResponse<NewsArticle>> => {
+    await new Promise(resolve => setTimeout(resolve, 500))
+    const article = mockNewsArticles.find(a => a.id === id)
+    if (article) {
+      const updated = { ...article, ...updates, updated_at: new Date().toISOString() }
+      return { data: updated, error: null }
+    }
+    return { data: null, error: { message: 'Article not found' } }
   },
 
-  // Delete article (admin only)
-  deleteArticle: async (id: string) => {
-    const { error } = await supabase
-      .from('news_articles')
-      .delete()
-      .eq('id', id)
-    
-    return { error }
+  deleteArticle: async (id: string): Promise<ApiResponse<null>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return { data: null, error: null }
   }
 }
 
-// Team members functions
+// Team members functions - Mock implementation
 export const team = {
-  // Get all team members
-  getAllMembers: async () => {
-    const { data, error } = await supabase
-      .from('team_members')
-      .select('*')
-      .order('created_at', { ascending: true })
-    
-    return { data, error }
+  getAllMembers: async (): Promise<ApiResponse<TeamMember[]>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return { data: mockTeamMembers, error: null }
   },
 
-  // Get team member by ID
-  getMemberById: async (id: string) => {
-    const { data, error } = await supabase
-      .from('team_members')
-      .select('*')
-      .eq('id', id)
-      .single()
-    
-    return { data, error }
+  getMemberById: async (id: string): Promise<ApiResponse<TeamMember>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    const member = mockTeamMembers.find(m => m.id === id)
+    if (member) {
+      return { data: member, error: null }
+    }
+    return { data: null, error: { message: 'Team member not found' } }
   },
 
-  // Create team member (admin only)
-  createMember: async (member: Omit<TeamMember, 'id' | 'created_at' | 'updated_at'>) => {
-    const { data, error } = await supabase
-      .from('team_members')
-      .insert([member])
-      .select()
-      .single()
-    
-    return { data, error }
+  createMember: async (
+    member: Omit<TeamMember, 'id' | 'created_at' | 'updated_at'>
+  ): Promise<ApiResponse<TeamMember>> => {
+    await new Promise(resolve => setTimeout(resolve, 500))
+    const newMember: TeamMember = {
+      id: Date.now().toString(),
+      ...member,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    }
+    return { data: newMember, error: null }
   },
 
-  // Update team member (admin only)
-  updateMember: async (id: string, updates: Partial<TeamMember>) => {
-    const { data, error } = await supabase
-      .from('team_members')
-      .update({ ...updates, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .select()
-      .single()
-    
-    return { data, error }
+  updateMember: async (
+    id: string,
+    updates: Partial<TeamMember>
+  ): Promise<ApiResponse<TeamMember>> => {
+    await new Promise(resolve => setTimeout(resolve, 500))
+    const member = mockTeamMembers.find(m => m.id === id)
+    if (member) {
+      const updated = { ...member, ...updates, updated_at: new Date().toISOString() }
+      return { data: updated, error: null }
+    }
+    return { data: null, error: { message: 'Team member not found' } }
   },
 
-  // Delete team member (admin only)
-  deleteMember: async (id: string) => {
-    const { error } = await supabase
-      .from('team_members')
-      .delete()
-      .eq('id', id)
-    
-    return { error }
+  deleteMember: async (id: string): Promise<ApiResponse<null>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return { data: null, error: null }
   }
 }
 
-// Impact stories functions
+// Impact stories functions - Mock implementation
 export const impact = {
-  // Get all impact stories
-  getAllStories: async () => {
-    const { data, error } = await supabase
-      .from('impact_stories')
-      .select('*')
-      .order('created_at', { ascending: false })
-    
-    return { data, error }
+  getAllStories: async (): Promise<ApiResponse<ImpactStory[]>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return { data: mockImpactStories, error: null }
   },
 
-  // Get featured stories
-  getFeaturedStories: async () => {
-    const { data, error } = await supabase
-      .from('impact_stories')
-      .select('*')
-      .eq('featured', true)
-      .order('created_at', { ascending: false })
-    
-    return { data, error }
+  getFeaturedStories: async (): Promise<ApiResponse<ImpactStory[]>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return { data: mockImpactStories.filter(s => s.featured), error: null }
   },
 
-  // Get story by ID
-  getStoryById: async (id: string) => {
-    const { data, error } = await supabase
-      .from('impact_stories')
-      .select('*')
-      .eq('id', id)
-      .single()
-    
-    return { data, error }
+  getStoryById: async (id: string): Promise<ApiResponse<ImpactStory>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    const story = mockImpactStories.find(s => s.id === id)
+    if (story) {
+      return { data: story, error: null }
+    }
+    return { data: null, error: { message: 'Story not found' } }
   },
 
-  // Create story (admin only)
-  createStory: async (story: Omit<ImpactStory, 'id' | 'created_at' | 'updated_at'>) => {
-    const { data, error } = await supabase
-      .from('impact_stories')
-      .insert([story])
-      .select()
-      .single()
-    
-    return { data, error }
+  createStory: async (
+    story: Omit<ImpactStory, 'id' | 'created_at' | 'updated_at'>
+  ): Promise<ApiResponse<ImpactStory>> => {
+    await new Promise(resolve => setTimeout(resolve, 500))
+    const newStory: ImpactStory = {
+      id: Date.now().toString(),
+      ...story,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    }
+    return { data: newStory, error: null }
   },
 
-  // Update story (admin only)
-  updateStory: async (id: string, updates: Partial<ImpactStory>) => {
-    const { data, error } = await supabase
-      .from('impact_stories')
-      .update({ ...updates, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .select()
-      .single()
-    
-    return { data, error }
+  updateStory: async (
+    id: string,
+    updates: Partial<ImpactStory>
+  ): Promise<ApiResponse<ImpactStory>> => {
+    await new Promise(resolve => setTimeout(resolve, 500))
+    const story = mockImpactStories.find(s => s.id === id)
+    if (story) {
+      const updated = { ...story, ...updates, updated_at: new Date().toISOString() }
+      return { data: updated, error: null }
+    }
+    return { data: null, error: { message: 'Story not found' } }
   },
 
-  // Delete story (admin only)
-  deleteStory: async (id: string) => {
-    const { error } = await supabase
-      .from('impact_stories')
-      .delete()
-      .eq('id', id)
-    
-    return { error }
+  deleteStory: async (id: string): Promise<ApiResponse<null>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return { data: null, error: null }
   }
 }
 
-// Services functions
+// Services functions - Mock implementation
 export const services = {
-  // Get all services
-  getAllServices: async () => {
-    const { data, error } = await supabase
-      .from('services')
-      .select('*')
-      .order('created_at', { ascending: true })
-    
-    return { data, error }
+  getAllServices: async (): Promise<ApiResponse<Service[]>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return { data: mockServices, error: null }
   },
 
-  // Get service by ID
-  getServiceById: async (id: string) => {
-    const { data, error } = await supabase
-      .from('services')
-      .select('*')
-      .eq('id', id)
-      .single()
-    
-    return { data, error }
+  getServiceById: async (id: string): Promise<ApiResponse<Service>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    const service = mockServices.find(s => s.id === id)
+    if (service) {
+      return { data: service, error: null }
+    }
+    return { data: null, error: { message: 'Service not found' } }
   },
 
-  // Create service (admin only)
-  createService: async (service: Omit<Service, 'id' | 'created_at' | 'updated_at'>) => {
-    const { data, error } = await supabase
-      .from('services')
-      .insert([service])
-      .select()
-      .single()
-    
-    return { data, error }
+  createService: async (
+    service: Omit<Service, 'id' | 'created_at' | 'updated_at'>
+  ): Promise<ApiResponse<Service>> => {
+    await new Promise(resolve => setTimeout(resolve, 500))
+    const newService: Service = {
+      id: Date.now().toString(),
+      ...service,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    }
+    return { data: newService, error: null }
   },
 
-  // Update service (admin only)
-  updateService: async (id: string, updates: Partial<Service>) => {
-    const { data, error } = await supabase
-      .from('services')
-      .update({ ...updates, updated_at: new Date().toISOString() })
-      .eq('id', id)
-      .select()
-      .single()
-    
-    return { data, error }
+  updateService: async (
+    id: string,
+    updates: Partial<Service>
+  ): Promise<ApiResponse<Service>> => {
+    await new Promise(resolve => setTimeout(resolve, 500))
+    const service = mockServices.find(s => s.id === id)
+    if (service) {
+      const updated = { ...service, ...updates, updated_at: new Date().toISOString() }
+      return { data: updated, error: null }
+    }
+    return { data: null, error: { message: 'Service not found' } }
   },
 
-  // Delete service (admin only)
-  deleteService: async (id: string) => {
-    const { error } = await supabase
-      .from('services')
-      .delete()
-      .eq('id', id)
-    
-    return { error }
+  deleteService: async (id: string): Promise<ApiResponse<null>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
+    return { data: null, error: null }
   }
 }
 
-// Analytics functions
+// Analytics functions - Mock implementation
 export const analytics = {
-  // Get donation statistics
-  getDonationStats: async () => {
-    const { data, error } = await supabase
-      .from('donations')
-      .select('amount, status, created_at')
-    
-    if (error) return { data: null, error }
-    
-    const totalDonations = data?.reduce((sum, donation) => sum + Number(donation.amount), 0) || 0
-    const completedDonations = data?.filter(d => d.status === 'completed').length || 0
-    const pendingDonations = data?.filter(d => d.status === 'pending').length || 0
-    
+  getDonationStats: async (): Promise<ApiResponse<{
+    totalAmount: number
+    totalDonations: number
+    completedDonations: number
+    pendingDonations: number
+  }>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
     return {
       data: {
-        totalAmount: totalDonations,
-        totalDonations: data?.length || 0,
-        completedDonations,
-        pendingDonations
+        totalAmount: 0,
+        totalDonations: 0,
+        completedDonations: 0,
+        pendingDonations: 0
       },
       error: null
     }
   },
 
-  // Get contact message statistics
-  getContactStats: async () => {
-    const { data, error } = await supabase
-      .from('contact_messages')
-      .select('status, created_at')
-    
-    if (error) return { data: null, error }
-    
-    const unreadMessages = data?.filter(m => m.status === 'unread').length || 0
-    const readMessages = data?.filter(m => m.status === 'read').length || 0
-    const repliedMessages = data?.filter(m => m.status === 'replied').length || 0
-    
+  getContactStats: async (): Promise<ApiResponse<{
+    totalMessages: number
+    unreadMessages: number
+    readMessages: number
+    repliedMessages: number
+  }>> => {
+    await new Promise(resolve => setTimeout(resolve, 300))
     return {
       data: {
-        totalMessages: data?.length || 0,
-        unreadMessages,
-        readMessages,
-        repliedMessages
+        totalMessages: 0,
+        unreadMessages: 0,
+        readMessages: 0,
+        repliedMessages: 0
       },
       error: null
     }
   }
-} 
+}

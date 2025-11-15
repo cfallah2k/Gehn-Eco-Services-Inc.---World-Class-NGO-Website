@@ -8,7 +8,7 @@ A modern, responsive website for Gehn Eco Services Inc., a women-led social ente
 - **Modern Loading Screen**: Advanced 10-second loading animation with informative content
 - **Responsive Design**: Fully responsive across all devices (mobile, tablet, desktop)
 - **Professional Layout**: Clean, organized content structure with proper spacing
-- **Admin Portal**: Secure Supabase-powered authentication system
+- **Admin Portal**: Mock authentication system (ready for backend integration)
 - **Multi-page Structure**: Organized content across dedicated pages
 
 ### Pages & Sections
@@ -25,7 +25,7 @@ A modern, responsive website for Gehn Eco Services Inc., a women-led social ente
 - **TypeScript**: Full type safety
 - **Tailwind CSS**: Utility-first styling
 - **Framer Motion**: Smooth animations and transitions
-- **Supabase**: Backend database and authentication
+- **Mock API**: Frontend-only with mock data (backend-ready structure)
 - **Responsive Images**: Optimized for all screen sizes
 
 ## 🛠️ Setup Instructions
@@ -33,7 +33,6 @@ A modern, responsive website for Gehn Eco Services Inc., a women-led social ente
 ### Prerequisites
 - Node.js 18+ 
 - npm or yarn
-- Supabase account
 
 ### 1. Clone the Repository
 ```bash
@@ -46,83 +45,21 @@ cd gehn-eco-services-website
 npm install
 ```
 
-### 3. Environment Configuration
-Create a `.env.local` file in the root directory:
+### 3. Environment Configuration (Optional)
+Create a `.env.local` file in the root directory (optional for frontend-only):
 
 ```env
-# Supabase Configuration
-NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
-
-# Admin Portal Configuration
-ADMIN_USERNAME=admin
-ADMIN_PASSWORD=ges2024
-
 # Contact Form Configuration
 CONTACT_EMAIL=info@gehnecservices.com
+
+# Admin Portal Configuration (Mock - will be replaced with backend auth)
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=ges2024
 ```
 
-### 4. Supabase Setup
+**Note**: This is a frontend-only application with mock data. See `BACKEND_INTEGRATION.md` for backend integration instructions.
 
-#### Create Supabase Project
-1. Go to [supabase.com](https://supabase.com)
-2. Create a new project
-3. Get your project URL and anon key from Settings > API
-
-#### Database Schema
-Run the following SQL in your Supabase SQL editor:
-
-```sql
--- Create users table
-CREATE TABLE users (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  email TEXT UNIQUE NOT NULL,
-  name TEXT NOT NULL,
-  role TEXT DEFAULT 'user' CHECK (role IN ('admin', 'user')),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
--- Create donations table
-CREATE TABLE donations (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  donor_name TEXT NOT NULL,
-  email TEXT NOT NULL,
-  amount DECIMAL(10,2) NOT NULL,
-  message TEXT,
-  status TEXT DEFAULT 'pending' CHECK (status IN ('pending', 'completed', 'failed')),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
--- Create contact_messages table
-CREATE TABLE contact_messages (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  name TEXT NOT NULL,
-  email TEXT NOT NULL,
-  subject TEXT NOT NULL,
-  message TEXT NOT NULL,
-  status TEXT DEFAULT 'unread' CHECK (status IN ('unread', 'read', 'replied')),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
--- Create newsletter_subscribers table
-CREATE TABLE newsletter_subscribers (
-  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
-  email TEXT UNIQUE NOT NULL,
-  status TEXT DEFAULT 'active' CHECK (status IN ('active', 'unsubscribed')),
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
-);
-
--- Insert default admin user
-INSERT INTO users (email, name, role) VALUES ('admin@gehnecservices.com', 'Admin User', 'admin');
-```
-
-#### Authentication Setup
-1. Go to Authentication > Settings in Supabase
-2. Enable Email auth provider
-3. Set up email templates (optional)
-
-### 5. Run Development Server
+### 4. Run Development Server
 ```bash
 npm run dev
 ```
@@ -146,7 +83,8 @@ Open [http://localhost:3000](http://localhost:3000) to view the website.
 │   ├── sections/         # Reusable section components
 │   └── ui/               # UI components (buttons, etc.)
 ├── lib/                  # Utility functions and configurations
-│   ├── supabase.ts       # Supabase client configuration
+│   ├── api.ts            # API layer (mock implementation, backend-ready)
+│   ├── types.ts          # TypeScript type definitions
 │   └── utils.ts          # Utility functions
 └── public/               # Static assets
 ```
@@ -199,13 +137,15 @@ module.exports = {
 
 ### Access
 - URL: `/admin/login`
-- Default credentials: `admin@gehnecservices.com` / `ges2024`
+- Mock authentication: Any email/password will work (for demo purposes)
 
 ### Features
-- Secure Supabase authentication
-- Dashboard for managing content
-- Analytics and reporting
-- User management
+- Mock authentication system
+- Dashboard for managing content (ready for backend integration)
+- Analytics and reporting (mock data)
+- User management (ready for backend integration)
+
+**Note**: Currently uses mock authentication. See `BACKEND_INTEGRATION.md` for backend setup.
 
 ## 📱 Responsive Design
 

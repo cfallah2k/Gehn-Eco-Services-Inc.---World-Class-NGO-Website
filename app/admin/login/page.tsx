@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { Eye, EyeOff, Shield, Lock, AlertCircle, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { supabase } from '@/lib/supabase'
+import { auth } from '@/lib/api'
 
 export default function AdminLogin() {
   const [credentials, setCredentials] = useState({
@@ -21,7 +21,7 @@ export default function AdminLogin() {
   useEffect(() => {
     // Check if user is already authenticated
     const checkAuth = async () => {
-      const { data: { session } } = await supabase.auth.getSession()
+      const { data: session } = await auth.getSession()
       if (session) {
         router.push('/admin')
       }
@@ -36,10 +36,10 @@ export default function AdminLogin() {
     setSuccess('')
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: credentials.email,
-        password: credentials.password,
-      })
+      const { data, error } = await auth.signIn(
+        credentials.email,
+        credentials.password
+      )
 
       if (error) {
         setError(error.message)
@@ -47,7 +47,11 @@ export default function AdminLogin() {
         return
       }
 
-      if (data.user) {
+      if (data) {
+        // Store mock session in localStorage
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('mock_session', JSON.stringify(data))
+        }
         setSuccess('Login successful! Redirecting...')
         setTimeout(() => {
           router.push('/admin')
