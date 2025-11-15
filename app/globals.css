@@ -54,6 +54,20 @@
   .section-gradient {
     background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   }
+  
+  @keyframes gradient {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+  }
+  
+  .animate-gradient {
+    animation: gradient 3s ease infinite;
+    background-size: 200% auto;
+  }
 }
 
 @layer utilities {

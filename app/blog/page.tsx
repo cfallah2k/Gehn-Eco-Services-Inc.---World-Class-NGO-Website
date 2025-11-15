@@ -16,7 +16,8 @@ import {
   Video,
   Mic,
   Clock,
-  Tag
+  Tag,
+  ArrowRight
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
@@ -205,16 +206,71 @@ export default function BlogPage() {
   return (
     <div className="space-y-0">
       {/* Hero Section */}
-      <section className="relative py-20 lg:py-32 bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        {/* Animated Background Pattern */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary-50/40 via-accent-50/30 to-transparent" />
+          <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] opacity-[0.03]" />
+          <motion.div
+            className="absolute inset-0"
+            animate={{
+              backgroundPosition: ['0% 0%', '100% 100%'],
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              repeatType: 'reverse',
+            }}
+            style={{
+              backgroundImage: 'radial-gradient(circle at 2px 2px, rgba(34, 197, 94, 0.15) 1px, transparent 0)',
+              backgroundSize: '40px 40px',
+            }}
+          />
+        </div>
+
+        {/* Floating Animated Elements */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              className={`absolute rounded-full opacity-20 blur-xl ${
+                i % 3 === 0 ? 'bg-primary-400' : i % 3 === 1 ? 'bg-accent-400' : 'bg-secondary-300'
+              }`}
+              style={{
+                width: `${60 + i * 20}px`,
+                height: `${60 + i * 20}px`,
+                left: `${10 + i * 15}%`,
+                top: `${20 + (i % 3) * 30}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                x: [0, 20, 0],
+                scale: [1, 1.2, 1],
+                opacity: [0.2, 0.3, 0.2],
+              }}
+              transition={{
+                duration: 4 + i,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: i * 0.5,
+              }}
+            />
+          ))}
+        </div>
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative z-10 w-full py-16 sm:py-20 md:py-24 lg:py-32">
           <div className="text-center max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-flex items-center px-4 py-2 rounded-full bg-primary-100 text-primary-700 text-sm font-medium mb-6"
+              className="inline-flex items-center px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm border border-primary-200/50 text-primary-700 text-sm font-medium mb-6 shadow-sm"
             >
-              <span className="w-2 h-2 bg-primary-500 rounded-full mr-2" />
+              <motion.span
+                className="w-2 h-2 bg-primary-500 rounded-full mr-2"
+                animate={{ scale: [1, 1.2, 1] }}
+                transition={{ duration: 2, repeat: Infinity }}
+              />
               Thought Leadership
             </motion.div>
             
@@ -222,10 +278,10 @@ export default function BlogPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-secondary-900 mb-6"
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold text-secondary-900 mb-6 leading-[1.1] tracking-tight"
             >
               Insights{' '}
-              <span className="bg-gradient-to-r from-primary-600 to-accent-600 bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary-600 via-accent-600 to-primary-600 bg-clip-text text-transparent animate-gradient">
                 & Analysis
               </span>
               <br />
@@ -236,7 +292,7 @@ export default function BlogPage() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.6 }}
-              className="text-xl text-secondary-600 max-w-3xl mx-auto mb-8"
+              className="text-lg sm:text-xl md:text-2xl text-secondary-600 max-w-3xl mx-auto mb-8 leading-relaxed"
             >
               Discover 200+ articles on environmental innovation, sustainability, and social impact. 
               Join 50,000+ readers from 75+ countries staying informed on global environmental issues.
@@ -248,10 +304,13 @@ export default function BlogPage() {
               transition={{ delay: 0.6, duration: 0.6 }}
               className="flex flex-col sm:flex-row gap-4 justify-center"
             >
-              <Button size="lg" asChild>
-                <Link href="#blog">Read Articles</Link>
+              <Button size="lg" asChild className="group text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 shadow-lg hover:shadow-xl transition-all">
+                <Link href="#blog">
+                  Read Articles
+                  <ArrowRight className="ml-2 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
               </Button>
-              <Button size="lg" variant="outline" asChild>
+              <Button size="lg" variant="outline" asChild className="text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 border-2 hover:bg-white/50 backdrop-blur-sm">
                 <Link href="/contact">Subscribe</Link>
               </Button>
             </motion.div>

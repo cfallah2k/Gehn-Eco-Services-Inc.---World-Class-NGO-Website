@@ -11,10 +11,8 @@ import {
   Mail, 
   Phone, 
   MapPin, 
-  ArrowRight,
   Heart
 } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 
 const footerLinks = {
   company: [
@@ -172,34 +170,6 @@ export function Footer() {
                 </li>
               ))}
             </ul>
-          </div>
-        </div>
-      </div>
-
-      {/* Newsletter Section */}
-      <div className="border-t border-secondary-800 py-8 sm:py-12 lg:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
-          <div className="grid md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-center">
-            <div>
-              <h3 className="text-xl sm:text-2xl font-bold mb-2">Stay Updated</h3>
-              <p className="text-secondary-300 text-sm sm:text-base">
-                Subscribe to our newsletter for the latest updates on environmental initiatives, 
-                success stories, and opportunities to get involved.
-              </p>
-            </div>
-            <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 bg-secondary-800 border border-secondary-700 rounded-lg text-white placeholder-secondary-400 focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm sm:text-base"
-              />
-              <Button asChild className="w-full sm:w-auto">
-                <Link href="/newsletter" className="flex items-center justify-center">
-                  Subscribe
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
           </div>
         </div>
       </div>
