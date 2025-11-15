@@ -4,8 +4,7 @@ import { useState, useEffect } from 'react'
 import { usePathname } from 'next/navigation'
 import { Header } from '@/components/layout/header'
 import { Footer } from '@/components/layout/footer'
-// Temporarily disabled for build debugging
-// import { LoadingScreen } from '@/components/loading-screen'
+import { LoadingScreen } from '@/components/loading-screen'
 import { Breadcrumbs } from '@/components/breadcrumbs'
 import { BackToTop } from '@/components/back-to-top'
 import { CookieConsent } from '@/components/cookie-consent'
@@ -31,10 +30,9 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
     return <>{children}</>
   }
 
-  // Temporarily disabled loading screen for build debugging
-  // if (isLoading) {
-  //   return <LoadingScreen onComplete={() => setIsLoading(false)} />
-  // }
+  if (isLoading) {
+    return <LoadingScreen onComplete={() => setIsLoading(false)} />
+  }
   
   return (
     <div className="flex min-h-screen flex-col">

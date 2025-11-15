@@ -139,7 +139,10 @@ export function LoadingScreen({ onComplete }: LoadingScreenProps) {
           >
             <div className="flex items-center space-x-4">
               <div className={`p-3 rounded-xl bg-gray-50 ${loadingSteps[currentStep].color}`}>
-                <loadingSteps[currentStep].icon className="h-6 w-6" />
+                {(() => {
+                  const IconComponent = loadingSteps[currentStep].icon
+                  return <IconComponent className="h-6 w-6" />
+                })()}
               </div>
               <div className="flex-1">
                 <h3 className="font-semibold text-gray-900 mb-1">
