@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion'
 import { 
-  Handshake, 
   Users, 
   Award,
   CheckCircle,
@@ -55,7 +54,7 @@ const partnerships = [
 
 const impactStats = [
   {
-    icon: Handshake,
+    icon: Users,
     value: 100,
     suffix: '+',
     label: 'Partnerships',
@@ -408,7 +407,7 @@ export default function PartnershipsPage() {
                 transition={{ delay: index * 0.05, duration: 0.6 }}
                 className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg"
               >
-                <Handshake className="h-5 w-5 text-blue-500 flex-shrink-0" />
+                <Users className="h-5 w-5 text-blue-500 flex-shrink-0" />
                 <span className="text-secondary-700">{benefit}</span>
               </motion.div>
             ))}
