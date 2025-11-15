@@ -7,7 +7,7 @@ export function ContactHero() {
   return (
     <section className="relative py-20 bg-gradient-to-br from-primary-600 to-green-600 text-white">
       <div className="absolute inset-0 bg-black opacity-20"></div>
-      <div className="relative container mx-auto px-4">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
         <motion.div
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}

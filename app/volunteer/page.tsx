@@ -82,7 +82,7 @@ export default function VolunteerPage() {
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 bg-gradient-to-br from-primary-50 via-accent-50 to-green-50 overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-5" />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 relative">
           <div className="text-center max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -135,7 +135,7 @@ export default function VolunteerPage() {
 
       {/* Why Volunteer Section */}
       <section className="py-16 lg:py-24 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary-900 mb-4">
               Why Volunteer With Us?
@@ -164,7 +164,7 @@ export default function VolunteerPage() {
 
       {/* Volunteer Opportunities */}
       <section className="py-16 lg:py-24 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary-900 mb-4">
               Volunteer Opportunities
@@ -231,7 +231,7 @@ export default function VolunteerPage() {
 
       {/* Testimonials */}
       <section className="py-16 lg:py-24 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary-900 mb-4">
               What Our Volunteers Say
@@ -266,7 +266,7 @@ export default function VolunteerPage() {
 
       {/* Application Form Section */}
       <section id="apply" className="py-16 lg:py-24 bg-gradient-to-br from-primary-600 to-accent-600">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-6">
               Ready to Make a Difference?

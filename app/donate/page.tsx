@@ -110,7 +110,7 @@ export default function DonatePage() {
     <div className="space-y-0">
       {/* Hero Section */}
       <section className="relative py-20 lg:py-32 bg-gradient-to-br from-green-50 via-blue-50 to-purple-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           <div className="text-center max-w-4xl mx-auto">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -164,7 +164,7 @@ export default function DonatePage() {
 
       {/* Impact Statistics */}
       <section className="py-16 lg:py-24 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary-900 mb-4">
               Your Impact in Numbers
@@ -197,7 +197,7 @@ export default function DonatePage() {
 
       {/* Donation Tiers */}
       <section className="py-16 lg:py-24 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary-900 mb-4">
               Choose Your Impact Level
@@ -246,7 +246,7 @@ export default function DonatePage() {
 
       {/* Testimonials */}
       <section className="py-16 lg:py-24 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-secondary-900 mb-4">
               Stories of Impact
@@ -294,7 +294,7 @@ export default function DonatePage() {
 
       {/* How Your Donation Helps */}
       <section className="py-16 lg:py-24 bg-gradient-to-r from-primary-600 to-accent-600">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-display font-bold text-white mb-4">
               How Your Donation Helps
@@ -342,7 +342,7 @@ export default function DonatePage() {
 
       {/* CTA Section */}
       <section className="py-16 lg:py-24 bg-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 lg:px-12 xl:px-16 text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
